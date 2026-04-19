@@ -1094,7 +1094,7 @@
           id: "w1",
           type: "alert",
           ref_id: "a1",
-          title: "产业链式图谱专题",
+          title: "产业数字图谱专题",
           status: "处理中",
           assignee: "s1",
           created_at: "2026-02-28",
@@ -3876,31 +3876,18 @@
     return '<div class="login-page">' +
       '<div class="login-left">' +
         '<div class="login-left-content">' +
-          '<div class="login-shield">' +
-            '<svg viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-              '<path d="M60 5 L110 28 L110 78 C110 110 85 133 60 142 C35 133 10 110 10 78 L10 28 Z" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" fill="rgba(255,255,255,0.04)"/>' +
-              '<path d="M60 18 L97 36 L97 76 C97 102 80 120 60 128 C40 120 23 102 23 76 L23 36 Z" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" fill="none"/>' +
-              '<line x1="60" y1="18" x2="60" y2="128" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>' +
-              '<line x1="23" y1="56" x2="97" y2="56" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>' +
-              '<line x1="23" y1="76" x2="97" y2="76" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>' +
-              '<line x1="40" y1="26" x2="28" y2="100" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>' +
-              '<line x1="80" y1="26" x2="92" y2="100" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>' +
-              '<circle cx="60" cy="56" r="14" stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>' +
-              '<circle cx="60" cy="56" r="6" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="rgba(255,255,255,0.06)"/>' +
-              '<path d="M60 42 L60 36" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>' +
-              '<path d="M60 70 L60 76" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>' +
-              '<path d="M46 56 L38 56" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>' +
-              '<path d="M74 56 L82 56" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>' +
-              '<circle cx="60" cy="36" r="2" fill="rgba(255,255,255,0.2)"/>' +
-              '<circle cx="60" cy="76" r="2" fill="rgba(255,255,255,0.2)"/>' +
-              '<circle cx="38" cy="56" r="2" fill="rgba(255,255,255,0.2)"/>' +
-              '<circle cx="82" cy="56" r="2" fill="rgba(255,255,255,0.2)"/>' +
-              '<rect x="52" y="86" width="16" height="10" rx="2" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>' +
-              '<path d="M56 92 L60 96 L68 88" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
-            '</svg>' +
+          '<h1 class="login-brand-title">辅政通</h1>' +
+          '<p class="login-brand-sub">数据驱动决策 · 智慧赋能产业</p>' +
+          '<div class="login-portal-grid">' +
+            '<div class="login-portal-card active" data-login-role="gov">' +
+              '<span class="login-portal-icon">🏛</span>' +
+              '<span class="login-portal-label">政府端</span>' +
+            '</div>' +
+            '<div class="login-portal-card" data-login-role="enterprise">' +
+              '<span class="login-portal-icon">🏢</span>' +
+              '<span class="login-portal-label">企业端</span>' +
+            '</div>' +
           '</div>' +
-          '<h2 class="login-slogan">统一认证、统一授权</h2>' +
-          '<p class="login-sub-slogan">数据驱动决策，智慧赋能产业</p>' +
         '</div>' +
       '</div>' +
       '<div class="login-right">' +
@@ -4018,16 +4005,16 @@
   function nav(role) {
     if (role === "gov") {
       return [
-        ["产业大脑首页", "/gov/home", "home"],
-        ["区域经济研判", "/gov/geo-street", "geo"],
-        ["产业链式图谱", "/gov/chain", "chain"],
-        ["重点项目调度", "/gov/key-projects", "project"],
-        ["领导决策支撑", "/gov/decision-data", "decision"],
+        ["辅政通首页", "/gov/home", "home"],
+        ["企业精准画像", "/gov/portrait", "portrait"],
+        ["产业数字图谱", "/gov/chain", "chain"],
+        ["政府目标督查", "/gov/economic-targets", "dashboard"],
         ["企业迁出预警", "/gov/enterprise-exit", "alert"],
-        ["经济目标考核", "/gov/economic-targets", "dashboard"],
-        ["政府统计数据", "/gov/government-stats", "report"],
-        ["企业画像分析", "/gov/portrait", "portrait"],
-        ["政策智能匹配", "/gov/policy-match", "policy"],
+        ["政策智慧匹配", "/gov/policy-match", "policy"],
+        ["数据智慧统计", "/gov/government-stats", "report"],
+        ["重点项目调度", "/gov/key-projects", "project"],
+        ["政策研究助手", "/gov/decision-data", "decision"],
+        ["区域经济地理", "/gov/geo-street", "geo"],
         ["演示数据设置", "/gov/settings", "settings"],
       ];
     }
@@ -4080,19 +4067,19 @@
     }
     // Sub-route fallbacks (kept consistent with sidebar at 6 chars)
     if (role === "gov") {
-      if (activePath.indexOf("/gov/geo-") === 0 || activePath === "/gov/overview") return "区域经济研判";
-      if (activePath.indexOf("/gov/chain") === 0) return "产业链式图谱";
+      if (activePath.indexOf("/gov/geo-") === 0 || activePath === "/gov/overview") return "区域经济地理";
+      if (activePath.indexOf("/gov/chain") === 0) return "产业数字图谱";
       if (activePath.indexOf("/gov/key-projects") === 0) return "重点项目调度";
-      if (activePath === "/gov/policy-enterprise" || activePath === "/gov/policy-gov") return "政策智能匹配";
-      if (activePath.indexOf("/gov/portrait/") === 0) return "企业画像分析";
+      if (activePath === "/gov/policy-enterprise" || activePath === "/gov/policy-gov") return "政策智慧匹配";
+      if (activePath.indexOf("/gov/portrait/") === 0) return "企业精准画像";
       if (activePath.indexOf("/gov/enterprise/") === 0) return "企业详细画像";
       if (activePath.indexOf("/gov/alert/") === 0) return "企业预警详情";
       if (activePath === "/gov/enterprises") return "企业总库目录";
       if (activePath === "/gov/alerts") return "预警分析看板";
       if (activePath === "/gov/ecosystem") return "产业生态全景";
       if (activePath === "/gov/investment-analysis") return "招商分析专题";
-      if (activePath === "/gov/ai-analysis") return "区域经济研判";
-      if (activePath === "/gov/brain-dashboard") return "产业大脑首页";
+      if (activePath === "/gov/ai-analysis") return "区域经济地理";
+      if (activePath === "/gov/brain-dashboard") return "辅政通首页";
     }
     if (role === "bank") {
       if (activePath.indexOf("/bank/lead/") === 0) return "融资线索详情";
@@ -4173,7 +4160,7 @@
     return (
       '<div class="app-shell">' +
       '<aside class="side">' +
-      '<div class="brand"><p class="brand-title">青羊区产业大脑演示平台</p><p class="brand-sub">' +
+      '<div class="brand"><p class="brand-title">辅政通</p><p class="brand-sub">' +
       esc(roleLabel(role) + ctx) +
       "</p></div>" +
       '<nav class="nav">' +
@@ -4368,11 +4355,11 @@
     return (
       '<div class="hero fade-in">' +
       '<div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:var(--accent);color:#fff;font-size:18px;font-weight:700;">脑</span><div>' +
-      "<h1 style=\"font-size:28px;margin:0;\">青羊区产业大脑演示平台</h1>" +
+      "<h1 style=\"font-size:28px;margin:0;\">辅政通</h1>" +
       "</div></div>" +
       '<p class="muted" style="margin:0 0 4px;font-size:14px;">请选择要进入的角色端口。</p>' +
       '<div class="role-grid" style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">' +
-      '<div class="role gov"><div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;"><span style="font-size:26px;">🏛</span><h2>青羊区政府端</h2></div><ul><li>区域经济动态分析与空间研判</li><li>产业链式图谱与招商补链分析</li><li>重点项目、领导决策、政策匹配一体化展示</li></ul>' +
+      '<div class="role gov"><div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;"><span style="font-size:26px;">🏛</span><h2>青羊区政府端</h2></div><ul><li>区域经济动态分析与空间研判</li><li>产业数字图谱与招商补链分析</li><li>重点项目、领导决策、政策匹配一体化展示</li></ul>' +
       '<div class="actions"><button class="btn primary" data-action="enter_role" data-role="gov">进入政府端</button></div></div>' +
       '<div class="role enterprise"><div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;"><span style="font-size:26px;">🏢</span><h2>青羊区企业端</h2></div><ul><li>供应链与资金链智能匹配服务</li><li>研发服务与产业专家对接</li><li>政策推送、园区推荐与线下活动</li></ul>' +
       '<div class="actions"><button class="btn primary" data-action="enter_role" data-role="enterprise">进入企业端</button></div></div>' +
@@ -5174,9 +5161,9 @@
         : ((ctx.park && ctx.park.name) || "园区")
       : ((ctx.street && ctx.street.name) || "街道");
     areaName = geoShortName(areaName, 14);
-    if (ctx.level === "building") return "区域经济研判";
-    if (ctx.level === "street") return "区域经济研判";
-    return "区域经济研判";
+    if (ctx.level === "building") return "区域经济地理";
+    if (ctx.level === "street") return "区域经济地理";
+    return "区域经济地理";
   }
 
   function geoTabs(ctx) {
@@ -7445,7 +7432,7 @@
       {
         icon: "geo",
         code: "SYS-01",
-        title: "区域经济研判专题",
+        title: "区域经济地理专题",
         status: "已上线",
         desc: "面向区级、街道、园区分层场景的区域经济动态分析工作台，支持热力研判、载体识别与空间承接分析。",
         tags: ["区域热力", "空间下钻", "承载分析"],
@@ -7456,7 +7443,7 @@
       {
         icon: "chain",
         code: "SYS-02",
-        title: "产业链式图谱专题",
+        title: "产业数字图谱专题",
         status: "已上线",
         desc: "围绕主导产业链展示链条结构、重点环节、薄弱节点和补链方向，支持节点企业映射与招商研判。",
         tags: ["链路图谱", "薄弱识别", "补链建议"],
@@ -7478,7 +7465,7 @@
       {
         icon: "policy",
         code: "SYS-04",
-        title: "政策智能匹配专题",
+        title: "政策智慧匹配专题",
         status: "已上线",
         desc: "基于企业画像与政策条目的智能匹配引擎，支持企业精准找政策、政策精准找企业、一键推送。",
         tags: ["政策匹配", "精准推送", "智能引擎"],
@@ -7489,7 +7476,7 @@
       {
         icon: "enterprise",
         code: "SYS-05",
-        title: "企业画像分析专题",
+        title: "企业精准画像专题",
         status: "已上线",
         desc: "基于多维指标体系的企业全景画像，支持按当地产业类别、行业分类、空间载体等维度精准筛选企业。",
         tags: ["精准画像", "多维筛选", "空间载体"],
@@ -7522,7 +7509,7 @@
       {
         icon: "decision",
         code: "SYS-08",
-        title: "领导决策支撑专题",
+        title: "政策研究助手专题",
         status: "已上线",
         desc: "围绕领导讲话、会议纪要和专题内容进行筛选、分析和汇总，形成决策支撑数据专题页。",
         tags: ["讲话研判", "会议研判", "专题支撑"],
@@ -7533,7 +7520,7 @@
       {
         icon: "dashboard",
         code: "SYS-09",
-        title: "经济目标考核专题",
+        title: "政府目标督查专题",
         status: "已上线",
         desc: "围绕重点经济目标、完成率趋势、区域/部门对比和预警指标清单形成年度目标考核专题页。",
         tags: ["目标考核", "完成率趋势", "区域对比"],
@@ -7544,7 +7531,7 @@
       {
         icon: "report",
         code: "SYS-10",
-        title: "政府统计数据专题",
+        title: "数据智慧统计专题",
         status: "已上线",
         desc: "围绕统计公报、统计年鉴和宏观趋势分析形成的统计资料与专题分析工作台。",
         tags: ["统计公报", "统计年鉴", "趋势分析"],
@@ -7571,14 +7558,14 @@
     ];
 
     var quickLinks = [
-      { href: "#/gov/geo-district", icon: "geo", title: "区域经济研判", desc: "区域经济热力与密度分析" },
-      { href: "#/gov/chain", icon: "chain", title: "产业链式图谱", desc: "链路图谱与短板识别" },
+      { href: "#/gov/geo-district", icon: "geo", title: "区域经济地理", desc: "区域经济热力与密度分析" },
+      { href: "#/gov/chain", icon: "chain", title: "产业数字图谱", desc: "链路图谱与短板识别" },
       { href: "#/gov/key-projects", icon: "project", title: "重点项目调度", desc: "项目总览、预警与推进追踪" },
-      { href: "#/gov/decision-data", icon: "decision", title: "领导决策支撑", desc: "讲话、会议与专题信息分析" },
+      { href: "#/gov/decision-data", icon: "decision", title: "政策研究助手", desc: "讲话、会议与专题信息分析" },
       { href: "#/gov/investment-analysis", icon: "invest", title: "招商研判专题", desc: "招商线索与补链建议联动" },
       { href: "#/gov/enterprise-exit", icon: "alert", title: "企业迁出预警", desc: "迁出风险分层与稳企处置" },
-      { href: "#/gov/economic-targets", icon: "dashboard", title: "经济目标考核", desc: "年度指标达标率与区域对比" },
-      { href: "#/gov/government-stats", icon: "report", title: "政府统计数据", desc: "统计公报、年鉴与趋势分析" },
+      { href: "#/gov/economic-targets", icon: "dashboard", title: "政府目标督查", desc: "年度指标达标率与区域对比" },
+      { href: "#/gov/government-stats", icon: "report", title: "数据智慧统计", desc: "统计公报、年鉴与趋势分析" },
     ];
 
     var featureUpdatedAt = today();
@@ -7614,7 +7601,7 @@
         href: "#/gov/decision-data",
         icon: "decision",
         kicker: "DECISION",
-        title: "领导决策支撑入口",
+        title: "政策研究助手入口",
         desc: "直接进入讲话与会议研判专题，查看领导讲话、会议资料和文档统计，不放入左侧导航。",
         tags: ["讲话研判", "会议研判", "专题摘要"],
         metric: { value: String(govDemoDecisionRecords(decisionSpeechSeed()).length + govDemoDecisionRecords(decisionMeetingSeed()).length), label: "决策文档" },
@@ -7640,8 +7627,8 @@
         href: "#/gov/economic-targets",
         icon: "dashboard",
         kicker: "TARGET",
-        title: "经济目标考核入口",
-        desc: "直接进入经济目标考核专题，查看年度指标完成率、区域/部门对比和预警指标分布。",
+        title: "政府目标督查入口",
+        desc: "直接进入政府目标督查专题，查看年度指标完成率、区域/部门对比和预警指标分布。",
         tags: ["目标考核", "主体对比", "预警指标"],
         metric: { value: String(6), label: "核心指标" },
         meta: [
@@ -7653,7 +7640,7 @@
         href: "#/gov/government-stats",
         icon: "report",
         kicker: "STATS",
-        title: "政府统计数据入口",
+        title: "数据智慧统计入口",
         desc: "直接进入统计数据专题，查看统计公报、统计年鉴和宏观经济趋势分析，不放入左侧导航。",
         tags: ["统计公报", "统计年鉴", "趋势分析"],
         metric: { value: String(realDocCount), label: "资料份数" },
@@ -7666,7 +7653,7 @@
 
     var positionCards = [
       { icon: "geo", title: "区域经济分析", desc: "面向区级-街道-园区分层研判的经济密度与热力分析", points: ["区级热力总览", "街道级经济密度评估", "楼宇详情联动查看"] },
-      { icon: "chain", title: "产业链式图谱", desc: "围绕主导产业进行链路分析、短板识别与补链建议", points: ["产业链式全景可视", "断链短板预警", "补链招商建议"] },
+      { icon: "chain", title: "产业数字图谱", desc: "围绕主导产业进行链路分析、短板识别与补链建议", points: ["产业链全景可视", "断链短板预警", "补链招商建议"] },
       { icon: "enterprise", title: "企业服务协同", desc: "政企银三端数据协同，精准匹配融资与政策", points: ["企业画像一键查看", "融资需求精准匹配", "政策推送与反馈闭环"] },
     ];
 
@@ -7678,16 +7665,16 @@
     ];
 
     var roadmap = [
-      { phase: "P1", title: "区域经济研判专题", status: "已上线", desc: "区域经济动态分析、街道园区下钻、楼宇详情联动" },
-      { phase: "P1", title: "产业链式图谱专题", status: "已上线", desc: "产业链全景、短板识别、补链建议与企业关联查询" },
-      { phase: "P2", title: "企业画像分析专题", status: "已上线", desc: "多维指标体系的企业全景画像，支持按行业、政策、载体维度精准筛选" },
-      { phase: "P2", title: "政策智能匹配专题", status: "已上线", desc: "企业找政策、政策找企业、智能匹配与一键推送申报" },
+      { phase: "P1", title: "区域经济地理专题", status: "已上线", desc: "区域经济动态分析、街道园区下钻、楼宇详情联动" },
+      { phase: "P1", title: "产业数字图谱专题", status: "已上线", desc: "产业链全景、短板识别、补链建议与企业关联查询" },
+      { phase: "P2", title: "企业精准画像专题", status: "已上线", desc: "多维指标体系的企业全景画像，支持按行业、政策、载体维度精准筛选" },
+      { phase: "P2", title: "政策智慧匹配专题", status: "已上线", desc: "企业找政策、政策找企业、智能匹配与一键推送申报" },
       { phase: "P2", title: "招商研判专题", status: "已上线", desc: "招商热力、补链判断、载体承接与风险协同的统一入口" },
       { phase: "P2", title: "重点项目调度专题", status: "已上线", desc: "项目总览、目录筛选、推进追踪和预警联动的项目专题页面" },
-      { phase: "P2", title: "领导决策支撑专题", status: "已上线", desc: "领导讲话、会议资料和文档统计的一体化专题分析页面" },
+      { phase: "P2", title: "政策研究助手专题", status: "已上线", desc: "领导讲话、会议资料和文档统计的一体化专题分析页面" },
       { phase: "P3", title: "企业迁出预警专题", status: "已上线", desc: "迁出风险识别、等级分层、重点企业名单与稳企留商处置联动" },
-      { phase: "P3", title: "经济目标考核专题", status: "已上线", desc: "重点经济指标总览、年度目标达标率、区域/部门对比与预警指标识别" },
-      { phase: "P3", title: "政府统计数据专题", status: "已上线", desc: "统计公报、统计年鉴和宏观经济趋势分析的统一专题工作台" },
+      { phase: "P3", title: "政府目标督查专题", status: "已上线", desc: "重点经济指标总览、年度目标达标率、区域/部门对比与预警指标识别" },
+      { phase: "P3", title: "数据智慧统计专题", status: "已上线", desc: "统计公报、统计年鉴和宏观经济趋势分析的统一专题工作台" },
     ];
 
     var blocks = cards
@@ -7869,25 +7856,25 @@
 
     /* ── Portal card definitions ── */
     var portalLeft = [
-      { title: "经济目标考核", href: "#/gov/economic-targets", desc: "实现区域经济目标完成情况的实时跟踪与考核评估", color: "#2670b8", gradient: "linear-gradient(135deg,#0f2942 0%,#1b5a9e 60%,#2670b8 100%)",
+      { title: "政府目标督查", href: "#/gov/economic-targets", desc: "实现区域经济目标完成情况的实时跟踪与考核评估", color: "#2670b8", gradient: "linear-gradient(135deg,#0f2942 0%,#1b5a9e 60%,#2670b8 100%)",
         svg: '<rect x="5" y="8" width="90" height="48" rx="3" fill="rgba(255,255,255,0.06)"/><line x1="15" y1="48" x2="15" y2="20" stroke="rgba(255,255,255,0.25)" stroke-width="6" stroke-linecap="round"/><line x1="30" y1="48" x2="30" y2="28" stroke="rgba(255,255,255,0.2)" stroke-width="6" stroke-linecap="round"/><line x1="45" y1="48" x2="45" y2="15" stroke="rgba(255,255,255,0.3)" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="48" x2="60" y2="32" stroke="rgba(255,255,255,0.18)" stroke-width="6" stroke-linecap="round"/><line x1="75" y1="48" x2="75" y2="22" stroke="rgba(255,255,255,0.22)" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="25" x2="85" y2="25" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" stroke-dasharray="3 3"/><polyline points="15,18 30,26 45,13 60,30 75,20" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><circle cx="45" cy="13" r="2.5" fill="rgba(255,255,255,0.5)"/>' },
-      { title: "企业画像分析", href: "#/gov/portrait", desc: "整合企业多维数据，构建全面企业画像，支持精准施策", color: "#2670b8", gradient: "linear-gradient(135deg,#183553 0%,#254768 50%,#1b789f 100%)",
+      { title: "企业精准画像", href: "#/gov/portrait", desc: "整合企业多维数据，构建全面企业画像，支持精准施策", color: "#2670b8", gradient: "linear-gradient(135deg,#183553 0%,#254768 50%,#1b789f 100%)",
         svg: '<rect x="8" y="6" width="35" height="24" rx="2" fill="rgba(255,255,255,0.08)"/><rect x="10" y="8" width="10" height="10" rx="5" fill="rgba(255,255,255,0.15)"/><rect x="22" y="9" width="18" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="22" y="13" width="12" height="2" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="10" y="21" width="30" height="2" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="10" y="25" width="20" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="55" y="6" width="38" height="24" rx="2" fill="rgba(255,255,255,0.06)"/><circle cx="65" cy="18" r="8" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-dasharray="32 20"/><text x="62" y="21" font-size="7" fill="rgba(255,255,255,0.25)">85</text><rect x="78" y="10" width="3" height="16" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="83" y="14" width="3" height="12" rx="1" fill="rgba(255,255,255,0.18)"/><rect x="88" y="8" width="3" height="18" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="8" y="34" width="84" height="20" rx="2" fill="rgba(255,255,255,0.05)"/><rect x="12" y="37" width="14" height="3" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="12" y="42" width="25" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="12" y="46" width="18" height="2" rx="1" fill="rgba(255,255,255,0.06)"/><rect x="42" y="37" width="14" height="3" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="42" y="42" width="20" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="72" y="37" width="14" height="3" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="72" y="42" width="16" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>' },
-      { title: "政策智能匹配", href: "#/gov/policy-match", desc: "智能匹配企业与适用政策，提高政策落实效率", color: "#2670b8", gradient: "linear-gradient(135deg,#1a3a5c 0%,#2670b8 50%,#4a9ad0 100%)",
+      { title: "政策智慧匹配", href: "#/gov/policy-match", desc: "智能匹配企业与适用政策，提高政策落实效率", color: "#2670b8", gradient: "linear-gradient(135deg,#1a3a5c 0%,#2670b8 50%,#4a9ad0 100%)",
         svg: '<rect x="5" y="5" width="42" height="50" rx="3" fill="rgba(255,255,255,0.08)"/><rect x="10" y="10" width="20" height="3" rx="1" fill="rgba(255,255,255,0.25)"/><rect x="10" y="16" width="32" height="2" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="10" y="20" width="28" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="10" y="24" width="32" height="2" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="10" y="28" width="22" height="2" rx="1" fill="rgba(255,255,255,0.07)"/><rect x="10" y="34" width="12" height="5" rx="2" fill="rgba(255,255,255,0.15)"/><rect x="25" y="34" width="12" height="5" rx="2" fill="rgba(255,255,255,0.12)"/><line x1="50" y1="20" x2="50" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" stroke-dasharray="2 2"/><path d="M47,25 C50,22 53,22 56,25" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" fill="none"/><path d="M47,35 C50,32 53,32 56,35" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" fill="none"/><rect x="55" y="5" width="42" height="50" rx="3" fill="rgba(255,255,255,0.06)"/><circle cx="66" cy="15" r="5" fill="rgba(255,255,255,0.1)"/><rect x="74" y="12" width="18" height="2.5" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="74" y="17" width="12" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><circle cx="66" cy="30" r="5" fill="rgba(255,255,255,0.08)"/><rect x="74" y="27" width="18" height="2.5" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="74" y="32" width="15" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><circle cx="66" cy="45" r="5" fill="rgba(255,255,255,0.1)"/><rect x="74" y="42" width="18" height="2.5" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="74" y="47" width="11" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>' },
       { title: "企业迁出预警", href: "#/gov/enterprise-exit", desc: "监控企业迁出动态，分析原因并提供预警机制", color: "#cc5a15", gradient: "linear-gradient(135deg,#6b1a1a 0%,#a03020 50%,#cc5a15 100%)",
         svg: '<rect x="5" y="5" width="90" height="50" rx="3" fill="rgba(255,255,255,0.05)"/><rect x="10" y="10" width="25" height="20" rx="2" fill="rgba(255,255,255,0.08)"/><rect x="12" y="12" width="8" height="8" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="12" y="22" width="20" height="2" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="12" y="26" width="14" height="2" rx="1" fill="rgba(255,255,255,0.07)"/><rect x="40" y="10" width="25" height="20" rx="2" fill="rgba(255,255,255,0.08)"/><rect x="42" y="12" width="8" height="8" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="42" y="22" width="20" height="2" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="42" y="26" width="16" height="2" rx="1" fill="rgba(255,255,255,0.07)"/><rect x="70" y="10" width="22" height="20" rx="2" fill="rgba(255,255,255,0.06)"/><path d="M76,20 L80,16 L84,20" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" fill="none"/><line x1="80" y1="16" x2="80" y2="26" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><rect x="10" y="35" width="82" height="16" rx="2" fill="rgba(255,255,255,0.06)"/><circle cx="20" cy="43" r="4" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><text x="17" y="45" font-size="5" fill="rgba(255,255,255,0.3)">!</text><rect x="28" y="40" width="35" height="2.5" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="28" y="44" width="25" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="70" y="39" width="16" height="8" rx="3" fill="rgba(255,255,255,0.12)"/>' },
-      { title: "产业链式图谱", href: "#/gov/chain", desc: "构建区域产业链全景图谱，分析产业结构与关联", color: "#2670b8", gradient: "linear-gradient(135deg,#0f2942 0%,#145c7d 50%,#1b789f 100%)",
+      { title: "产业数字图谱", href: "#/gov/chain", desc: "构建区域产业链全景图谱，分析产业结构与关联", color: "#2670b8", gradient: "linear-gradient(135deg,#0f2942 0%,#145c7d 50%,#1b789f 100%)",
         svg: '<circle cx="50" cy="28" r="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><text x="44" y="31" font-size="7" fill="rgba(255,255,255,0.3)">核心</text><circle cx="20" cy="15" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><circle cx="80" cy="15" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><circle cx="20" cy="45" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><circle cx="80" cy="45" r="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><circle cx="50" cy="52" r="6" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><line x1="26" y1="19" x2="41" y2="24" stroke="rgba(255,255,255,0.18)" stroke-width="1"/><line x1="74" y1="19" x2="59" y2="24" stroke="rgba(255,255,255,0.18)" stroke-width="1"/><line x1="26" y1="41" x2="41" y2="32" stroke="rgba(255,255,255,0.18)" stroke-width="1"/><line x1="74" y1="41" x2="59" y2="32" stroke="rgba(255,255,255,0.18)" stroke-width="1"/><line x1="50" y1="38" x2="50" y2="46" stroke="rgba(255,255,255,0.12)" stroke-width="1"/><circle cx="12" cy="30" r="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/><circle cx="88" cy="30" r="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/><line x1="16" y1="30" x2="20" y2="22" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/><line x1="84" y1="30" x2="80" y2="22" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>' },
     ];
     var portalRight = [
-      { title: "领导决策支撑", href: "#/gov/decision-data", desc: "提供多维度数据分析，为领导决策提供科学依据", color: "#2670b8", gradient: "linear-gradient(135deg,#183553 0%,#2670b8 50%,#4a7ab0 100%)",
+      { title: "政策研究助手", href: "#/gov/decision-data", desc: "提供多维度数据分析，为政策研究提供科学依据", color: "#2670b8", gradient: "linear-gradient(135deg,#183553 0%,#2670b8 50%,#4a7ab0 100%)",
         svg: '<rect x="5" y="5" width="55" height="50" rx="3" fill="rgba(255,255,255,0.06)"/><rect x="10" y="10" width="22" height="3" rx="1" fill="rgba(255,255,255,0.25)"/><rect x="10" y="16" width="45" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="10" y="20" width="40" height="2" rx="1" fill="rgba(255,255,255,0.06)"/><rect x="10" y="24" width="45" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="10" y="30" width="30" height="2" rx="1" fill="rgba(255,255,255,0.06)"/><rect x="10" y="34" width="45" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="10" y="40" width="22" height="3" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="10" y="46" width="38" height="2" rx="1" fill="rgba(255,255,255,0.06)"/><rect x="65" y="8" width="30" height="18" rx="2" fill="rgba(255,255,255,0.08)"/><polyline points="68,22 74,16 80,19 86,12 92,15" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/><circle cx="80" cy="19" r="1.5" fill="rgba(255,255,255,0.4)"/><rect x="65" y="30" width="30" height="8" rx="2" fill="rgba(255,255,255,0.06)"/><rect x="68" y="32" width="8" height="4" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="78" y="32" width="14" height="4" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="65" y="42" width="30" height="8" rx="2" fill="rgba(255,255,255,0.05)"/><rect x="68" y="44" width="10" height="4" rx="1" fill="rgba(255,255,255,0.12)"/><rect x="80" y="44" width="12" height="4" rx="1" fill="rgba(255,255,255,0.08)"/>' },
-      { title: "区域经济研判", href: "#/gov/geo-district", desc: "分析区域经济发展态势，预测经济走向", color: "#2670b8", gradient: "linear-gradient(135deg,#0f2942 0%,#1b5a9e 60%,#1b789f 100%)",
+      { title: "区域经济地理", href: "#/gov/geo-district", desc: "分析区域经济发展态势，预测经济走向", color: "#2670b8", gradient: "linear-gradient(135deg,#0f2942 0%,#1b5a9e 60%,#1b789f 100%)",
         svg: '<rect x="5" y="5" width="90" height="50" rx="3" fill="rgba(255,255,255,0.04)"/><path d="M15,40 L25,35 L30,38 L40,28 L52,32 L58,22 L68,30 L78,18 L88,25" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="20" opacity="0.3"/><path d="M10,45 C20,42 25,30 35,35 C45,40 50,20 60,25 C70,30 75,15 90,20" fill="rgba(255,255,255,0.06)" stroke="none"/><path d="M10,45 C20,42 25,30 35,35 C45,40 50,20 60,25 C70,30 75,15 90,20" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><circle cx="35" cy="35" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><circle cx="60" cy="25" r="5" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><circle cx="90" cy="20" r="3" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><rect x="56" y="10" width="20" height="10" rx="2" fill="rgba(255,255,255,0.1)"/><rect x="58" y="12" width="10" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="58" y="15" width="16" height="2" rx="1" fill="rgba(255,255,255,0.1)"/><line x1="10" y1="50" x2="90" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>' },
       { title: "重点项目调度", href: "#/gov/key-projects", desc: "实时监控重点项目进度，协调解决项目问题", color: "#2670b8", gradient: "linear-gradient(135deg,#254768 0%,#2670b8 40%,#6a9ad0 100%)",
         svg: '<rect x="5" y="8" width="90" height="46" rx="3" fill="rgba(255,255,255,0.05)"/><rect x="10" y="12" width="80" height="8" rx="2" fill="rgba(255,255,255,0.06)"/><rect x="12" y="14" width="52" height="4" rx="1.5" fill="rgba(255,255,255,0.2)"/><text x="66" y="17.5" font-size="4" fill="rgba(255,255,255,0.3)">65%</text><rect x="10" y="23" width="80" height="8" rx="2" fill="rgba(255,255,255,0.06)"/><rect x="12" y="25" width="68" height="4" rx="1.5" fill="rgba(255,255,255,0.25)"/><text x="82" y="28.5" font-size="4" fill="rgba(255,255,255,0.3)">85%</text><rect x="10" y="34" width="80" height="8" rx="2" fill="rgba(255,255,255,0.06)"/><rect x="12" y="36" width="38" height="4" rx="1.5" fill="rgba(255,255,255,0.15)"/><text x="52" y="39.5" font-size="4" fill="rgba(255,255,255,0.3)">48%</text><rect x="10" y="45" width="80" height="8" rx="2" fill="rgba(255,255,255,0.06)"/><rect x="12" y="47" width="75" height="4" rx="1.5" fill="rgba(255,255,255,0.22)"/><text x="89" y="50.5" font-size="4" fill="rgba(255,255,255,0.3)">94%</text><line x1="50" y1="8" x2="50" y2="12" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" stroke-dasharray="1 1"/>' },
-      { title: "政府统计数据", href: "#/gov/government-stats", desc: "整合各类政府统计数据，提供多维度查询分析", color: "#2670b8", gradient: "linear-gradient(135deg,#183553 0%,#254768 50%,#1b5a9e 100%)",
+      { title: "数据智慧统计", href: "#/gov/government-stats", desc: "整合各类政府统计数据，提供多维度查询分析", color: "#2670b8", gradient: "linear-gradient(135deg,#183553 0%,#254768 50%,#1b5a9e 100%)",
         svg: '<rect x="5" y="5" width="42" height="50" rx="3" fill="rgba(255,255,255,0.07)"/><rect x="9" y="9" width="18" height="3" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="9" y="15" width="34" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="9" y="19" width="28" height="2" rx="1" fill="rgba(255,255,255,0.06)"/><rect x="9" y="23" width="34" height="2" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="9" y="27" width="20" height="2" rx="1" fill="rgba(255,255,255,0.06)"/><line x1="9" y1="33" x2="43" y2="33" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/><rect x="9" y="36" width="12" height="14" rx="1" fill="rgba(255,255,255,0.1)"/><rect x="23" y="40" width="12" height="10" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="37" y="34" width="6" height="16" rx="1" fill="rgba(255,255,255,0.08)"/><rect x="55" y="5" width="42" height="24" rx="3" fill="rgba(255,255,255,0.06)"/><polyline points="60,24 68,18 74,22 80,12 88,16" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><circle cx="68" cy="18" r="1.5" fill="rgba(255,255,255,0.35)"/><circle cx="80" cy="12" r="1.5" fill="rgba(255,255,255,0.35)"/><rect x="55" y="32" width="42" height="23" rx="3" fill="rgba(255,255,255,0.05)"/><circle cx="76" cy="44" r="9" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="5" stroke-dasharray="36 20"/><text x="73" y="46" font-size="6" fill="rgba(255,255,255,0.2)">%</text><rect x="59" y="35" width="10" height="2.5" rx="1" fill="rgba(255,255,255,0.15)"/><rect x="59" y="39" width="8" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>' },
     ];
     // 按客户关注度重排：核心高频功能优先
@@ -7944,7 +7931,7 @@
       { id: "kp1", name: "青羊航空智造总部基地扩能项目", type: "产业升级", level: "市重点", department: "经信局", street_id: "gs22", building_id: "gbs065", industry: "航空航天", status: "在建", warning_level: "中", total_invest: 32.5, fixed_asset: 24.2, annual_plan: 8.6, annual_done: 5.2, progress: 61, stage: "主体施工", participate: "企业投资 + 政府协调", address: "黄田坝街道 · 青羊航电产业楼", coord_x: 50.63, coord_y: 54.20, dual_owner: "经信局 / 发改局", source: "技改扩能", start_plan: "2025-09", end_plan: "2027-06", summary: "围绕航空航电、结构件制造和测试验证能力进行扩能，形成青羊区航空产业新增承载空间。", issue: "设备到货节奏偏慢，需同步协调专项审批。", relation: ["与航空航天主导产业直接关联，承担上游制造和中游配套双重作用。", "与黄田坝街道现有航空研发、适航服务主体形成上下游协同。"] },
       { id: "kp2", name: "少城沉浸式文旅街区提升项目", type: "城市更新", level: "区重点", department: "文体旅局", street_id: "gs11", building_id: "gb15", industry: "文化旅游", status: "在建", warning_level: "低", total_invest: 12.8, fixed_asset: 8.9, annual_plan: 3.6, annual_done: 2.7, progress: 74, stage: "场景装修", participate: "区属平台 + 社会资本", address: "少城街道 · 宽巷子文创园 A 座", coord_x: 55.57, coord_y: 57.35, dual_owner: "文体旅局 / 商务局", source: "街区焕新", start_plan: "2025-12", end_plan: "2026-11", summary: "打造以宽窄巷子夜游、演艺和数字内容联动为核心的沉浸式文旅消费项目。", issue: "演艺审批和招商签约节奏需进一步压紧。", relation: ["与少城文创活力港、宽窄巷子演艺中心等空间载体一体化建设。", "项目建成后将直接带动文旅、演艺和新消费企业导入。"] },
       { id: "kp3", name: "东大街金融科技服务枢纽项目", type: "楼宇提质", level: "市重点", department: "金融工作局", street_id: "gs23", building_id: "gbs022", industry: "金融", status: "在建", warning_level: "中", total_invest: 18.4, fixed_asset: 13.6, annual_plan: 5.5, annual_done: 2.9, progress: 53, stage: "设备安装", participate: "国资平台 + 金融机构", address: "东大街街道 · 锦江金融城", dual_owner: "金融工作局 / 投促局", source: "载体提质", start_plan: "2025-10", end_plan: "2026-12", summary: "聚焦金融科技、风控服务和资本中介，提升东大街金融服务港的综合承载能力。", issue: "部分头部金融科技项目仍处于意向阶段。", relation: ["与金融链条中的风控、基金和资本服务节点相呼应。", "有利于提升东大街街道的总部经济和金融服务密度。"] },
-      { id: "kp4", name: "建设路数字文博产业升级项目", type: "产业导入", level: "区重点", department: "文创办", street_id: "gs32", building_id: "gbs075", industry: "文化旅游", status: "预备", warning_level: "高", total_invest: 9.7, fixed_asset: 6.1, annual_plan: 2.4, annual_done: 0.8, progress: 34, stage: "手续办理", participate: "社会资本", address: "建设路街道 · 东郊记忆文创区运营楼", dual_owner: "文创办 / 发改局", source: "平台招商", start_plan: "2026-02", end_plan: "2027-03", summary: "重点导入数字文博、虚拟制作和互动体验企业，打造建设路街道文博演艺新场景。", issue: "招商企业签约率不足，前期手续仍有压茬空间。", relation: ["对应产业链式图谱中的数字采集、虚拟制作和演艺运营环节。", "与东郊记忆运营资源联动，适合做重点招商展示项目。"] },
+      { id: "kp4", name: "建设路数字文博产业升级项目", type: "产业导入", level: "区重点", department: "文创办", street_id: "gs32", building_id: "gbs075", industry: "文化旅游", status: "预备", warning_level: "高", total_invest: 9.7, fixed_asset: 6.1, annual_plan: 2.4, annual_done: 0.8, progress: 34, stage: "手续办理", participate: "社会资本", address: "建设路街道 · 东郊记忆文创区运营楼", dual_owner: "文创办 / 发改局", source: "平台招商", start_plan: "2026-02", end_plan: "2027-03", summary: "重点导入数字文博、虚拟制作和互动体验企业，打造建设路街道文博演艺新场景。", issue: "招商企业签约率不足，前期手续仍有压茬空间。", relation: ["对应产业数字图谱中的数字采集、虚拟制作和演艺运营环节。", "与东郊记忆运营资源联动，适合做重点招商展示项目。"] },
       { id: "kp5", name: "驷马桥智慧物流节点建设项目", type: "基础配套", level: "市重点", department: "商务局", street_id: "gs33", building_id: "gbs033", industry: "商务商贸", status: "在建", warning_level: "低", total_invest: 21.3, fixed_asset: 15.8, annual_plan: 6.8, annual_done: 4.9, progress: 72, stage: "主体施工", participate: "企业投资", address: "驷马桥街道 · 国际铁路港智慧仓配园", dual_owner: "商务局 / 口岸物流办", source: "枢纽建设", start_plan: "2025-08", end_plan: "2026-10", summary: "建设智慧仓配和跨境服务联动节点，强化成华区商贸物流承载与履约效率。", issue: "暂无明显阻滞，整体推进稳定。", relation: ["与仓配系统、跨境服务和履约网络等链条节点直接对应。", "有助于承接平台招商和跨境贸易增量项目。"] },
       { id: "kp6", name: "府南低空试制平台项目", type: "中试平台", level: "区重点", department: "经信局", street_id: "gs2", building_id: "gb3", industry: "低空经济", status: "在建", warning_level: "中", total_invest: 16.2, fixed_asset: 11.9, annual_plan: 4.2, annual_done: 2.1, progress: 50, stage: "设备安装", participate: "国资平台 + 企业投资", address: "府南街道 · 府南航空配套园 1 栋", coord_x: 54.32, coord_y: 56.41, dual_owner: "经信局 / 投促局", source: "中试平台", start_plan: "2025-11", end_plan: "2026-12", summary: "面向低空飞行器零部件试制、小批量验证和场景测试，补足府南街道中试承接能力。", issue: "设备采购节点需要进一步压缩周期。", relation: ["与航空航天、低空经济的制造验证和运维配套环节形成联动。", "适合衔接产业链薄弱节点招商后的承接落地。"] },
       { id: "kp7", name: "桂溪智算芯片中试平台项目", type: "科研平台", level: "市重点", department: "科技局", street_id: "gs29", building_id: "gbs066", industry: "人工智能", status: "预备", warning_level: "高", total_invest: 27.6, fixed_asset: 19.5, annual_plan: 7.4, annual_done: 1.8, progress: 25, stage: "谋划储备", participate: "企业投资 + 基金导入", address: "桂溪街道 · 武侯智算芯谷", dual_owner: "科技局 / 经信局", source: "平台招商", start_plan: "2026-03", end_plan: "2027-09", summary: "导入智算芯片验证、中试和模型推理基础设施，强化桂溪街道 AI 产业的底座能力。", issue: "资金拼盘和头部团队导入仍需加力。", relation: ["对接人工智能产业链中的算力芯片、模型服务和算力平台环节。", "适合作为高新区边界外的特色承接项目进行展示。"] },
@@ -9471,7 +9458,7 @@
     meetings.forEach(function (item) { meetingTopics[item.topic] = (meetingTopics[item.topic] || 0) + 1; });
     var speechStats = Object.keys(speechTopics).map(function (key) { return "<li>" + esc(key + " · " + speechTopics[key] + " 条") + "</li>"; }).join("");
     var meetingStats = Object.keys(meetingTopics).map(function (key) { return "<li>" + esc(key + " · " + meetingTopics[key] + " 场") + "</li>"; }).join("");
-    return '<div class="decision-page fade-in"><div class="decision-topline"><div class="decision-topline-main">' + uiIcon('decision') + '<span class="decision-topline-title">领导决策支撑专题</span></div><div class="decision-mode-switch"><a class="decision-mode-btn ' +
+    return '<div class="decision-page fade-in"><div class="decision-topline"><div class="decision-topline-main">' + uiIcon('decision') + '<span class="decision-topline-title">政策研究助手专题</span></div><div class="decision-mode-switch"><a class="decision-mode-btn ' +
       (decisionView === "speech" ? "active" : "") + '" href="' + href({ ddv: "speech", ddfocus: "1" }) + '">领导讲话研判</a><a class="decision-mode-btn ' + (decisionView === "meeting" ? "active" : "") +
       '" href="' + href({ ddv: "meeting", ddfocus: "1" }) + '">会议纪要研判</a><a class="decision-back-link" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a></div></div>' +
       '<div class="decision-mode-bar"><a class="decision-mode-btn ' +
@@ -9698,7 +9685,7 @@
       page: meetingPage
     });
 
-    return '<div class="decision-page fade-in"><div class="decision-topline"><div class="decision-topline-main">' + uiIcon('decision') + '<span class="decision-topline-title">领导决策支撑专题</span></div><div class="decision-topline-extra"><a class="decision-back-link" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a></div></div>' +
+    return '<div class="decision-page fade-in"><div class="decision-topline"><div class="decision-topline-main">' + uiIcon('decision') + '<span class="decision-topline-title">政策研究助手专题</span></div><div class="decision-topline-extra"><a class="decision-back-link" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a></div></div>' +
       '<div class="decision-reference-grid">' + speechCard + meetingCard + '</div></div>';
   }
 
@@ -10493,7 +10480,7 @@
       /* ── Top bar ── */
       '<div class="decision-topline">' +
         '<div class="decision-topline-main">' +
-          uiIcon('dashboard') + '<span class="decision-topline-title">经济目标考核</span>' +
+          uiIcon('dashboard') + '<span class="decision-topline-title">政府目标督查</span>' +
         '</div>' +
         '<div class="decision-topline-extra">' +
           '<span class="target-scope-tag">' + esc(targetSecurityLevelText(user)) + '</span>' +
@@ -10606,7 +10593,7 @@
       /* ── Top bar ── */
       '<div class="decision-topline">' +
         '<div class="decision-topline-main">' +
-          uiIcon('gov') + '<span class="decision-topline-title">政府统计数据专题</span>' +
+          uiIcon('gov') + '<span class="decision-topline-title">数据智慧统计专题</span>' +
         '</div>' +
         '<div class="decision-topline-extra">' +
           '<a class="decision-back-link" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a>' +
@@ -10898,7 +10885,7 @@
 
     var suggestionHtml = [
       "建议优先围绕“" + topStreetName + "”和“" + topParkName + "”组织招商线索核查，先锁定承接空间和重点项目来源。",
-      "建议同步进入“" + industry + "”产业链式图谱，优先查看薄弱环节识别结果，再形成补链招商对象池。",
+      "建议同步进入“" + industry + "”产业数字图谱，优先查看薄弱环节识别结果，再形成补链招商对象池。",
       "如涉及重点企业经营波动，建议联动迁出预警模块开展稳企留商研判，避免招商与稳企两张皮。"
     ].map(function (line) {
       return "<li>" + esc(line) + "</li>";
@@ -12335,7 +12322,7 @@
         z: (detailRt.q && detailRt.q.z) || ""
       });
     }
-    var listLabel = fromExit ? "返回迁出预警" : (fromChain ? "返回产业链式图谱" : "返回列表");
+    var listLabel = fromExit ? "返回迁出预警" : (fromChain ? "返回产业数字图谱" : "返回列表");
 
     var tags = (e.tags || [])
       .map(function (t) {
@@ -14250,7 +14237,7 @@
       '<div class="chain-root">' +
       '<header class="chain-topbar"><div class="chain-brand with-icon"><span class="topbar-brand-icon">' +
       uiIcon("chain", "brand-icon") +
-      '</span><span>产业链式图谱</span></div>' +
+      '</span><span>产业数字图谱</span></div>' +
       '<div class="chain-top-tools"><div class="chain-search"><input data-role="chain-search" value="' +
       esc(keyword) +
       '" placeholder="搜索节点/企业/环节..." /></div>' +
@@ -14713,7 +14700,7 @@
   }
 
   /* ════════════════════════════════════════════════════════
-   *  政企政策智能匹配系统
+   *  政企政策智慧匹配系统
    * ════════════════════════════════════════════════════════ */
 
   /* --- 首页 --- */
@@ -14721,7 +14708,7 @@
     return (
       '<div class="pm-home fade-in">' +
         '<div class="pm-home-bg">' +
-          '<header class="kp-topline pm-home-header"><div class="kp-topline-main">' + uiIcon('policy') + '<span>政策智能匹配专题</span></div><div class="kp-topline-actions pm-topbar-actions"><a class="kp-back-link pm-home-back" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a></div></header>' +
+          '<header class="kp-topline pm-home-header"><div class="kp-topline-main">' + uiIcon('policy') + '<span>政策智慧匹配专题</span></div><div class="kp-topline-actions pm-topbar-actions"><a class="kp-back-link pm-home-back" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a></div></header>' +
           '<section class="pm-home-hero">' +
             '<h1 class="pm-home-title">政策智能<em>精准匹配</em>·高效联动</h1>' +
             '<p class="pm-home-subtitle">基于企业画像与政策条目的智能匹配引擎，实现企业精准找政策、政策精准找企业</p>' +
@@ -16533,7 +16520,7 @@
       '<p class="title" style="display:inline;">' + esc(e.name) + '</p> ' + badges +
       '<div class="portrait-detail-meta">' + esc(e.industry) + ' · ' + esc(e.level || "") + ' · ' + esc(e.uscc) + '</div>' +
       '</div><div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">' +
-      (fromChain ? '<a class="btn" href="' + esc(chainBackHref) + '">返回产业链式图谱</a>' : '') +
+      (fromChain ? '<a class="btn" href="' + esc(chainBackHref) + '">返回产业数字图谱</a>' : '') +
       '<a class="btn" href="' + esc(portraitBackHref) + '">← 返回列表</a>' +
       '<a class="btn" href="' + esc(enterpriseDetailHref) + '">查看企业档案</a>' +
       '<button class="btn primary" data-action="export_demo">导出画像</button>' +
@@ -17141,10 +17128,10 @@
       '<div><p style="margin:0;line-height:1.7;"><b>建议演示路径（10-15 分钟）</b></p>' +
       '<ol style="margin:10px 0 0;line-height:1.7;">' +
       "<li>平台首页：查看青羊区重点专题入口和核心指标总览</li>" +
-      "<li>区域经济研判：区级视图 -> 街道视图 -> 园区视图</li>" +
-      "<li>产业链式图谱：查看薄弱环节、补链方向与相关企业</li>" +
+      "<li>区域经济地理：区级视图 -> 街道视图 -> 园区视图</li>" +
+      "<li>产业数字图谱：查看薄弱环节、补链方向与相关企业</li>" +
       "<li>重点项目调度：查看项目总览、目录筛选和项目详情</li>" +
-      "<li>领导决策支撑 / 政府统计数据：查看统计摘要、讲话会议分析和资料库</li>" +
+      "<li>政策研究助手 / 数据智慧统计：查看统计摘要、讲话会议分析和资料库</li>" +
       "</ol><p class=\"muted\" style=\"margin:12px 0 0;line-height:1.7;\">注：当前平台为青羊区政府专属演示版，数据已按青羊区专题场景收敛展示。</p></div>" +
       '<div class="row-actions"><button class="btn" data-action="modal_close">关闭</button></div>';
     modalOpen("GIS 演示说明", html);
@@ -17725,9 +17712,9 @@
       return;
     }
 
-    /* ── Role picker ── */
+    /* ── Role picker — redirect to login for role re-selection ── */
     if (path === "/" || path === "") {
-      app.innerHTML = pageRolePicker();
+      location.hash = "#/login";
       return;
     }
 
@@ -18013,7 +18000,7 @@
       var exportCurrent = exportSeries.length ? exportSeries[exportSeries.length - 1] : null;
       var exportYoY = exportCurrent && exportPrev && exportPrev.value ? (((exportCurrent.value - exportPrev.value) / Math.abs(exportPrev.value)) * 100) : null;
       var exportText = [
-        "# 青羊区政府统计数据专题分析摘要",
+        "# 青羊区数据智慧统计专题分析摘要",
         "",
         "生成时间：" + nowFmt(),
         "专题指标：" + exportMetric.label,
@@ -18025,14 +18012,14 @@
         "分析结论：",
         "1. 当前以“" + exportMetric.label + "”为观察主指标，结合青羊区统计公报和统计年鉴形成趋势研判。",
         "2. 最新年度指标值为 " + metricValueText(numValue(exportLatest[exportMetric.id]), exportMetric.unit) + "，" + (exportYoY == null ? "暂无同比口径。" : "同比变化 " + fixed(exportYoY, 1) + "%。"),
-        "3. 建议结合重点产业、重点项目和招商线索进一步交叉分析，形成领导决策支撑材料。",
+        "3. 建议结合重点产业、重点项目和招商线索进一步交叉分析，形成政策研究材料。",
         "",
         "引用资料：",
         qingyangDecisionLibrary().slice(0, 6).map(function (item, idx) {
           return (idx + 1) + ". " + (item.title || "统计资料") + "（" + String(item.year || "--") + "）";
         }).join("\n")
       ].join("\n");
-      downloadText("青羊区政府统计数据专题分析摘要.md", exportText);
+      downloadText("青羊区数据智慧统计专题分析摘要.md", exportText);
       toast("已导出统计分析摘要", "success");
       return;
     }
@@ -18423,7 +18410,7 @@
       var tabE = (rtCE.q && rtCE.q.tab) || "intro";
       var termE = ((rtCE.q && rtCE.q.term) || "").trim();
       var md =
-        "# 主导产业链式图谱分析导出\n\n" +
+        "# 主导产业数字图谱分析导出\n\n" +
         "- 行业：" +
         industryE +
         "\n" +
@@ -18437,7 +18424,7 @@
         today() +
         "\n\n" +
         "注：该文档由 Demo 原型导出，仅用于演示。";
-      return downloadText("产业链式图谱_" + industryE + "_" + today() + ".md", md);
+      return downloadText("产业数字图谱_" + industryE + "_" + today() + ".md", md);
     }
     if (act === "geo_carrier_all") return updateGeoHash({ carrier: "building,factory" });
     if (act === "geo_carrier_none") return updateGeoHash({ carrier: "none" });
@@ -19416,11 +19403,28 @@
     var selectedAccount = ((document.getElementById("login-demo-account") || {}).value || "admin").trim();
     setLoginUser(selectedAccount);
     var loginUser = currentUser();
-    location.hash = "#/gov/home";
-    toast("登录成功，欢迎使用产业大脑平台 —— " + loginUser.name + "（" + loginUser.dept + "）");
+    /* Route based on selected portal role */
+    var activePortal = document.querySelector('.login-portal-card.active');
+    var loginRole = activePortal ? (activePortal.getAttribute('data-login-role') || 'gov') : 'gov';
+    if (loginRole === 'enterprise') {
+      setState(function (st) { st.role = 'enterprise'; });
+      location.hash = '#/ent/home';
+    } else {
+      setState(function (st) { st.role = 'gov'; });
+      location.hash = '#/gov/home';
+    }
+    toast("登录成功，欢迎使用辅政通 —— " + loginUser.name + "（" + loginUser.dept + "）");
   });
 
   document.addEventListener("click", function (ev) {
+    /* Login portal card selection */
+    var portalCard = ev.target.closest('.login-portal-card');
+    if (portalCard) {
+      var allCards = document.querySelectorAll('.login-portal-card');
+      for (var pi = 0; pi < allCards.length; pi++) allCards[pi].classList.remove('active');
+      portalCard.classList.add('active');
+      return;
+    }
     /* Refresh captcha */
     if (ev.target.closest('[data-action="refresh-captcha"]')) {
       _captchaCode = generateCaptcha();
@@ -19644,11 +19648,11 @@
   function aiChatAnswer(q) {
     var low = q.toLowerCase();
     if (/产业链|链式|图谱|补链|短板/.test(low))
-      return "产业链式图谱专题已上线，当前覆盖航空航天、金融、文旅、商务商贸、人工智能、低空经济等主导产业。\n\n您可以进入「产业链式图谱」专题查看链条结构和薄弱节点分析，也可以直接点击首页卡片进入。";
+      return "产业数字图谱专题已上线，当前覆盖航空航天、金融、文旅、商务商贸、人工智能、低空经济等主导产业。\n\n您可以进入「产业数字图谱」专题查看链条结构和薄弱节点分析，也可以直接点击首页卡片进入。";
     if (/企业|画像|筛选|名录/.test(low))
-      return "企业画像分析专题支持按产业类别、行业分类、空间载体等维度精准筛选企业。\n\n目前已接入青羊区高成长企业库，可查看企业详细档案和楼宇载体详情。";
+      return "企业精准画像专题支持按产业类别、行业分类、空间载体等维度精准筛选企业。\n\n目前已接入青羊区高成长企业库，可查看企业详细档案和楼宇载体详情。";
     if (/政策|匹配|推送|兑现/.test(low))
-      return "政策智能匹配专题提供「企业找政策」和「政策找企业」双入口，支持政策级联筛选、企业分页清单和一键推送。\n\n可从首页卡片进入该专题。";
+      return "政策智慧匹配专题提供「企业找政策」和「政策找企业」双入口，支持政策级联筛选、企业分页清单和一键推送。\n\n可从首页卡片进入该专题。";
     if (/迁出|预警|风险|留商/.test(low))
       return "企业迁出预警专题围绕迁出风险识别、等级分层和跟进处置构建。\n\n当前预警企业按高/中/低三级分层，支持按街道和行业筛选。";
     if (/招商|投资|线索/.test(low))
@@ -19656,14 +19660,14 @@
     if (/项目|调度|进度/.test(low))
       return "重点项目调度专题当前共纳入多个市/区重点项目，覆盖产业升级、城市更新、中试平台等类型。\n\n可按状态、部门、街道筛选，并查看项目进展和预警情况。";
     if (/GDP|经济|统计|公报|年鉴/.test(low))
-      return "政府统计数据专题已接入统计公报和统计年鉴资料，支持指标趋势与预测分析。\n\n经济目标考核专题可查看年度指标完成率和区域对比。";
+      return "数据智慧统计专题已接入统计公报和统计年鉴资料，支持指标趋势与预测分析。\n\n政府目标督查专题可查看年度指标完成率和区域对比。";
     if (/决策|讲话|会议/.test(low))
-      return "领导决策支撑专题围绕领导讲话、会议纪要和专题内容进行筛选分析和汇总。\n\n可用于决策支撑和专题资料查阅。";
+      return "政策研究助手专题围绕领导讲话、会议纪要和专题内容进行筛选分析和汇总。\n\n可用于政策研究和专题资料查阅。";
     if (/你好|您好|嗨|hi|hello/.test(low))
       return "您好！请问有什么可以帮您的？我可以回答关于区域经济、产业链、企业、政策、招商、项目等方面的问题。";
     if (/谢谢|感谢|thanks/.test(low))
       return "不客气！如果还有其他问题，随时可以问我。";
-    return "感谢您的提问。产业大脑平台当前已上线十大专题模块，涵盖区域经济研判、产业链图谱、企业画像、政策匹配、招商研判、迁出预警、重点项目、决策支撑、经济目标考核和统计数据等方面。\n\n请问您具体想了解哪个方向的内容？";
+    return "感谢您的提问。辅政通当前已上线十大专题模块，涵盖区域经济地理、产业链图谱、企业画像、政策匹配、招商研判、迁出预警、重点项目、决策支撑、政府目标督查和统计数据等方面。\n\n请问您具体想了解哪个方向的内容？";
   }
 
   render();

@@ -17398,7 +17398,7 @@ a {
 .login-page {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #2c4f7c 0%, #3b6a9e 30%, #5a8bbd 60%, #7ba5d0 85%, #8fb3d8 100%);
+  background: linear-gradient(135deg, #1e3a5f 0%, #2c5a8c 40%, #3a7fc8 100%);
   font-family: var(--font-sans);
 }
 
@@ -17414,33 +17414,79 @@ a {
   text-align: center;
 }
 
-.login-shield {
-  width: 200px;
-  height: 240px;
-  margin: 0 auto 36px;
-}
-
-.login-shield svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 4px 32px rgba(0,0,0,0.12));
-}
-
-.login-slogan {
+.login-brand-title {
   color: #fff;
-  font-size: 26px;
+  font-size: 42px;
   font-weight: 700;
-  letter-spacing: 4px;
-  margin: 0 0 14px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  margin: 0 0 12px;
+  letter-spacing: 8px;
 }
 
-.login-sub-slogan {
-  color: rgba(255,255,255,0.6);
+.login-brand-sub {
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+  margin: 0 0 48px;
+  letter-spacing: 3px;
+}
+
+/* ── Portal cards ── */
+.login-portal-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.login-portal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 36px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all 200ms ease;
+  backdrop-filter: blur(4px);
+  min-width: 130px;
+}
+
+.login-portal-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.login-portal-card.active {
+  background: rgba(255,255,255,0.18);
+  border-color: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.login-portal-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.login-portal-label {
+  color: rgba(255,255,255,0.7);
   font-size: 15px;
-  margin: 0;
+  font-weight: 600;
   letter-spacing: 2px;
 }
+
+.login-portal-card.active .login-portal-label {
+  color: #fff;
+}
+
+/* ── Unused old classes ── */
+.login-brand-row { display: none; }
+.login-brand-badge { display: none; }
+.login-portal-hint { display: none; }
+.login-portal-info { display: none; }
+.login-portal-check { display: none; }
+.login-left-footer { display: none; }
+.login-shield { display: none; }
+.login-slogan { display: none; }
+.login-sub-slogan { display: none; }
 
 .login-right {
   display: flex;
@@ -17451,10 +17497,10 @@ a {
 
 .login-card {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+  border-radius: 14px;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.2);
   padding: 32px 40px 28px;
-  width: 440px;
+  width: 420px;
   max-width: 100%;
   position: relative;
   overflow: clip;
@@ -17780,13 +17826,15 @@ a {
   .login-left {
     padding: 40px 20px 20px;
   }
-  .login-shield {
-    width: 120px;
-    height: 140px;
-    margin-bottom: 20px;
+  .login-brand-title {
+    font-size: 32px;
+    letter-spacing: 4px;
   }
-  .login-slogan {
-    font-size: 22px;
+  .login-brand-sub {
+    margin-bottom: 28px;
+  }
+  .login-portal-card {
+    padding: 18px 24px;
   }
   .login-right {
     padding: 0 20px 40px;

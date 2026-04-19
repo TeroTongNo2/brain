@@ -5,7 +5,7 @@
     enabled: false,
     sessionMinutes: 5,
     storagePrefix: "brain_demo_trial_gate_v1",
-    title: "青羊区产业大脑试用入口",
+    title: "辅政通试用入口",
     subtitle: "请输入一次性试用账号和密码。当前方案只适用于 GitHub Pages 场景下的轻量演示约束。",
     helpText: "同一浏览器内，账号首次登录后只保留 5 分钟体验窗口。5 分钟后会自动失效。",
     expiryText: "本次试用已到期。当前浏览器里的该账号不会再次放行，请联系我方重新发放新的试用账号。",
@@ -13,7 +13,7 @@
     demoScripts: [
       "./assets/data.js?v=20260321k",
       "./assets/qingyang_real_data.js?v=20260326f",
-      "./assets/app.js?v=20260417d"
+      "./assets/app.js?v=20260419j"
     ],
     accounts: [
       {
