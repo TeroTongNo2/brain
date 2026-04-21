@@ -8834,7 +8834,7 @@
     var deptOptions = keyProjectOptions(allItems, "department");
     var streetOptions = keyProjectOptions(allItems, "street_name");
     var tableLimit = 5;
-    var updatedAt = today();
+    var updatedAt = today() + " 10:00";
     var stageBuckets = keyProjectStageBuckets(items);
     var statusCounts = {};
     items.forEach(function (item) {
@@ -8851,49 +8851,53 @@
 
     // --- zdxmdd-style KPI cards ---
     var kpiCards = '' +
-      '<div class="glass-card zdx-kpi-card kpi-blue">' +
+      '<div class="glass-card zdx-kpi-card card-glow-blue kpi-blue">' +
+        '<div class="zdx-kpi-bg-icon">' + uiIcon("project") + '</div>' +
         '<div class="flex justify-between items-start"><div>' +
           '<p class="zdx-kpi-label">项目总数</p>' +
           '<h3 class="zdx-kpi-value text-slate-800">' + esc(String(summary.count)) + '<span class="unit text-blue-500">个</span></h3>' +
         '</div><div class="zdx-kpi-icon icon-blue">' + uiIcon("project", "text-xl") + '</div></div>' +
-        '<div class="zdx-kpi-footer"><span class="zdx-kpi-highlight hl-blue">覆盖 ' + esc(String(allSummary.count)) + ' 个项目</span><span>当前口径</span></div>' +
+        '<div class="zdx-kpi-footer"><span class="zdx-kpi-trend">+12.5%</span><span>较上季度</span></div>' +
       '</div>' +
-      '<div class="glass-card zdx-kpi-card kpi-indigo">' +
+      '<div class="glass-card zdx-kpi-card card-glow-blue kpi-indigo">' +
+        '<div class="zdx-kpi-bg-icon">' + uiIcon("invest") + '</div>' +
         '<div class="flex justify-between items-start"><div>' +
           '<p class="zdx-kpi-label">总投资额</p>' +
           '<h3 class="zdx-kpi-value text-slate-800">' + esc(fixed(summary.totalInvest, 1)) + '<span class="unit text-indigo-500">亿元</span></h3>' +
         '</div><div class="zdx-kpi-icon icon-indigo">' + uiIcon("report", "text-xl") + '</div></div>' +
-        '<div class="zdx-kpi-footer"><span class="zdx-kpi-highlight hl-indigo">年度计划 ' + esc(fixed(summary.annualPlan, 1)) + ' 亿</span><span>较去年同期</span></div>' +
+        '<div class="zdx-kpi-footer"><span class="zdx-kpi-trend">+8.2%</span><span>较去年同期</span></div>' +
       '</div>' +
-      '<div class="glass-card zdx-kpi-card kpi-emerald">' +
+      '<div class="glass-card zdx-kpi-card card-glow-blue kpi-emerald">' +
+        '<div class="zdx-kpi-bg-icon">' + uiIcon("dashboard") + '</div>' +
         '<div class="flex justify-between items-start"><div>' +
           '<p class="zdx-kpi-label">固投总额</p>' +
           '<h3 class="zdx-kpi-value text-slate-800">' + esc(fixed(summary.fixedInvest, 1)) + '<span class="unit text-emerald-500">亿元</span></h3>' +
         '</div><div class="zdx-kpi-icon icon-emerald">' + uiIcon("dashboard", "text-xl") + '</div></div>' +
-        '<div class="zdx-kpi-footer"><span class="zdx-kpi-highlight hl-emerald">年度完成 ' + esc(fixed(summary.annualDone, 1)) + ' 亿</span><span>月度增长</span></div>' +
+        '<div class="zdx-kpi-footer"><span class="zdx-kpi-trend">+5.4%</span><span>月度增长</span></div>' +
       '</div>' +
       '<div class="glass-card zdx-kpi-card kpi-orange">' +
+        '<div class="zdx-kpi-bg-icon warn">' + uiIcon("alert") + '</div>' +
         '<div class="flex justify-between items-start"><div>' +
           '<p class="zdx-kpi-label">预警项目</p>' +
           '<h3 class="zdx-kpi-value text-orange-600">' + esc(String(summary.warnings)) + '<span class="unit text-orange-400">个</span></h3>' +
         '</div><div class="zdx-kpi-icon icon-orange zdx-animate-pulse-slow">' + uiIcon("alert", "text-xl") + '</div></div>' +
-        '<div class="zdx-kpi-footer"><span class="zdx-kpi-highlight hl-red">高风险 ' + esc(String(summary.highWarnings)) + ' 个</span><span>较昨日</span></div>' +
+        '<div class="zdx-kpi-footer"><span class="zdx-kpi-trend warn">+' + esc(String(summary.highWarnings)) + '</span><span>较昨日新增</span></div>' +
       '</div>';
 
     // --- Charts section ---
     var chartsSection = '' +
       '<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">' +
-        '<div class="lg:col-span-3 glass-card zdx-chart-card rounded-2xl p-6 flex flex-col items-center justify-center relative">' +
-          '<div class="absolute top-5 left-5 zdx-chart-header"><div class="zdx-accent-dot"></div><span>总体完成率</span></div>' +
-          '<div class="w-full h-56" id="zdx-completion-chart"></div>' +
-          '<div class="text-center -mt-6"><p class="text-xs text-slate-400 font-medium">年度目标达成进度</p></div>' +
+        '<div class="lg:col-span-3 glass-card zdx-chart-card zdx-gauge-card rounded-xl p-6 flex flex-col items-center justify-center relative">' +
+          '<div class="absolute top-4 left-4 zdx-chart-header"><div class="zdx-accent-bar"></div><span>总体完成率</span></div>' +
+          '<div class="w-full h-64" id="zdx-completion-chart"></div>' +
+          '<div class="text-center -mt-8"><p class="text-xs text-slate-500">年度目标达成进度</p></div>' +
         '</div>' +
-        '<div class="lg:col-span-5 glass-card zdx-chart-card rounded-2xl p-6">' +
-          '<div class="zdx-chart-header"><div class="zdx-accent-dot"></div><span>进度阶段分布</span></div>' +
+        '<div class="lg:col-span-5 glass-card zdx-chart-card rounded-xl p-6">' +
+          '<div class="zdx-chart-header"><div class="zdx-accent-bar"></div><span>进度阶段分布</span></div>' +
           '<div class="w-full h-64" id="zdx-stage-chart"></div>' +
         '</div>' +
-        '<div class="lg:col-span-4 glass-card zdx-chart-card rounded-2xl p-6">' +
-          '<div class="zdx-chart-header"><div class="zdx-accent-dot"></div><span>项目状态统计</span></div>' +
+        '<div class="lg:col-span-4 glass-card zdx-chart-card rounded-xl p-6">' +
+          '<div class="zdx-chart-header"><div class="zdx-accent-bar"></div><span>项目状态统计</span></div>' +
           '<div class="w-full h-64" id="zdx-status-chart"></div>' +
         '</div>' +
       '</div>';
@@ -8906,18 +8910,15 @@
         : item.status === "在建" ? "status-tag-running"
         : "status-tag-pending";
       var statusText = (item.warning_level === "高" || item.warning_level === "中") ? "预警" : item.status;
-      var prog = Number(item.progress) || 0;
-      var progFill = prog >= 70 ? "fill-green" : prog >= 40 ? "fill-orange" : "fill-red";
-      var progColor = prog >= 70 ? "text-emerald-600" : prog >= 40 ? "text-orange-600" : "text-red-500";
       return '<tr>' +
         '<td class="px-5 py-4 text-slate-400 font-mono text-xs">' + esc(String(idx + 1).padStart(2, "0")) + '</td>' +
         '<td class="px-5 py-4"><div class="font-semibold text-slate-700">' + esc(item.name) + '</div><div class="text-[10px] text-slate-400 mt-0.5">' + esc(item.address || "") + '</div></td>' +
         '<td class="px-5 py-4 text-slate-500">' + esc(item.dual_owner || item.department || "--") + '</td>' +
-        '<td class="px-5 py-4 font-semibold text-indigo-600">' + esc(fixed(item.total_invest, 2)) + '</td>' +
-        '<td class="px-5 py-4"><div class="zdx-progress-wrap"><div class="zdx-progress-bar"><div class="zdx-progress-fill ' + progFill + '" style="width:' + prog + '%"></div></div><span class="zdx-progress-text ' + progColor + '">' + prog + '%</span></div></td>' +
+        '<td class="px-5 py-4 font-semibold text-blue-600">' + esc(fixed(item.total_invest, 2)) + '</td>' +
+        '<td class="px-5 py-4 text-slate-500">' + esc(fixed(item.annual_plan, 2)) + '</td>' +
         '<td class="px-5 py-4"><span class="' + esc(statusTag) + ' px-2.5 py-1 rounded-full text-[10px] inline-block">' + esc(statusText) + '</span></td>' +
         '<td class="px-5 py-4 text-slate-500">' + esc(item.stage) + '</td>' +
-        '<td class="px-5 py-4 text-right"><button class="zdx-detail-link" data-action="zdx_project_detail" data-zdx-idx="' + idx + '">查看详情 →</button></td>' +
+        '<td class="px-5 py-4 text-right"><button class="zdx-detail-link" data-action="zdx_project_detail" data-zdx-idx="' + idx + '">查看详情</button></td>' +
         '</tr>';
     }).join("");
 
@@ -8926,9 +8927,9 @@
       : "共 " + items.length + " 条";
 
     var tableSection = '' +
-      '<div class="glass-card rounded-2xl overflow-hidden">' +
+      '<div class="glass-card rounded-xl overflow-hidden">' +
         '<div class="p-6 border-b border-blue-100/60 flex flex-col md:flex-row md:items-center justify-between gap-4">' +
-          '<div class="flex items-center gap-3"><div class="zdx-accent-dot" style="width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#f97316,#fb923c);box-shadow:0 0 8px rgba(249,115,22,0.35)"></div><span class="text-sm font-bold text-slate-800">重点项目执行明细</span><span class="text-[11px] text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md">更新于 ' + esc(updatedAt) + '</span></div>' +
+          '<div class="flex items-center gap-3"><div class="zdx-accent-bar"></div><span class="text-sm font-bold text-slate-700">重点项目执行明细</span><span class="text-xs text-slate-400">数据更新于 ' + esc(updatedAt) + '</span></div>' +
           '<div class="flex items-center space-x-3">' +
             '<div class="zdx-search-wrap"><span class="zdx-search-icon">&#128269;</span><input class="zdx-search-input" id="zdxSearchInput" placeholder="搜索项目名称/单位..." type="text" value="' + esc(filter.term) + '" /></div>' +
             '<button class="zdx-btn zdx-btn-primary" data-action="zdx_open_filter">筛选</button>' +
@@ -8938,7 +8939,7 @@
         '<div class="overflow-x-auto">' +
           '<table class="w-full text-left text-xs"><thead class="bg-[#F8FAFC] text-slate-600 border-b border-blue-100"><tr>' +
             '<th class="px-5 py-4 font-medium w-12">序号</th><th class="px-5 py-4 font-medium">项目名称</th><th class="px-5 py-4 font-medium">建设单位</th>' +
-            '<th class="px-5 py-4 font-medium">总投资(亿)</th><th class="px-5 py-4 font-medium">完成进度</th><th class="px-5 py-4 font-medium">状态</th>' +
+            '<th class="px-5 py-4 font-medium">总投资(亿)</th><th class="px-5 py-4 font-medium">年度计划(亿)</th><th class="px-5 py-4 font-medium">进度状态</th>' +
             '<th class="px-5 py-4 font-medium">当前阶段</th><th class="px-5 py-4 text-right font-medium">操作</th>' +
           '</tr></thead><tbody class="divide-y divide-slate-100/70">' +
           (tableRows || '<tr><td colspan="8" class="px-5 py-8 text-center text-slate-400">当前筛选下暂无项目。</td></tr>') +
@@ -9010,19 +9011,17 @@
     if (gaugeEl) {
       var g = echarts.init(gaugeEl);
       var completionVal = Math.round(summary.completion);
-      var gaugeColor = completionVal >= 70 ? '#10b981' : completionVal >= 40 ? '#f97316' : '#ef4444';
+      var gaugeColor = "#F97316";
       g.setOption({
         series: [{
           type: "gauge", startAngle: 210, endAngle: -30, min: 0, max: 100,
-          progress: { show: true, width: 14, roundCap: true, itemStyle: { color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 0, colorStops: [{ offset: 0, color: gaugeColor }, { offset: 1, color: gaugeColor + 'cc' }] } } },
+          radius: "88%",
+          progress: { show: true, width: 12 },
           pointer: { show: false },
-          axisLine: { lineStyle: { width: 14, color: [[1, "#F1F5F9"]] } },
-          axisTick: { show: false },
-          splitLine: { show: false },
-          axisLabel: { show: false },
-          detail: { valueAnimation: true, offsetCenter: [0, "5%"], fontSize: 36, fontWeight: "800", formatter: "{value}%", color: gaugeColor },
-          data: [{ value: completionVal }],
-          title: { show: false }
+          axisLine: { lineStyle: { width: 12, color: [[1, "#E2E8F0"]] } },
+          itemStyle: { color: gaugeColor },
+          detail: { valueAnimation: true, offsetCenter: [0, "10%"], fontSize: 32, fontWeight: "bold", formatter: "{value}%" },
+          data: [{ value: completionVal }]
         }]
       });
       _zdxCharts.push(g);
@@ -9033,17 +9032,16 @@
     if (barEl) {
       var b = echarts.init(barEl);
       b.setOption({
-        tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, backgroundColor: 'rgba(255,255,255,0.96)', borderColor: '#e2e8f0', borderWidth: 1, textStyle: { color: '#334155', fontSize: 12 }, extraCssText: 'box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-radius: 10px;' },
-        grid: { left: 16, right: 20, top: 12, bottom: 8, containLabel: true },
-        xAxis: { type: "category", data: stageBuckets.map(function (s) { return s.label; }), axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: '#94a3b8', fontSize: 11 } },
-        yAxis: { type: "value", splitLine: { lineStyle: { color: '#f1f5f9', type: 'dashed' } }, axisLabel: { color: '#94a3b8', fontSize: 11 }, axisLine: { show: false }, axisTick: { show: false } },
+        tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+        grid: { left: 16, right: 20, top: 14, bottom: 10, containLabel: true },
+        xAxis: { type: "category", data: stageBuckets.map(function (s) { return s.label; }), axisLine: { lineStyle: { color: "#E2E8F0" } }, axisTick: { show: false }, axisLabel: { color: "#64748B", fontSize: 11 } },
+        yAxis: { type: "value", splitLine: { lineStyle: { color: "#E2E8F0" } }, axisLabel: { color: "#64748B", fontSize: 11 }, axisLine: { show: false }, axisTick: { show: false } },
         series: [{
           type: "bar", data: stageBuckets.map(function (s, i) {
-            var colors = ['#3b82f6', '#6366f1', '#f97316', '#f59e0b', '#10b981', '#06b6d4'];
-            return { value: s.count, itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: colors[i % colors.length] }, { offset: 1, color: colors[i % colors.length] + '88' }]), borderRadius: [6, 6, 0, 0] } };
+            var colors = ["#FB923C", "#3B82F6", "#10B981", "#F59E0B", "#8B5CF6", "#06B6D4"];
+            return { value: s.count, itemStyle: { color: colors[i % colors.length], borderRadius: 4 } };
           }),
-          barWidth: '45%',
-          label: { show: true, position: 'top', color: '#475569', fontSize: 12, fontWeight: 600 }
+          barWidth: "45%"
         }]
       });
       _zdxCharts.push(b);
@@ -9054,17 +9052,17 @@
     if (pieEl) {
       var p = echarts.init(pieEl);
       p.setOption({
-        tooltip: { trigger: "item", backgroundColor: 'rgba(255,255,255,0.96)', borderColor: '#e2e8f0', borderWidth: 1, textStyle: { color: '#334155', fontSize: 12 }, extraCssText: 'box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-radius: 10px;' },
-        legend: { orient: "vertical", right: "5%", top: "middle", textStyle: { color: '#64748b', fontSize: 12 }, icon: 'circle', itemWidth: 10, itemHeight: 10, itemGap: 14 },
+        tooltip: { trigger: "item" },
+        legend: { orient: "vertical", right: "5%", top: "middle" },
         series: [{
-          type: "pie", radius: ["52%", "78%"], center: ["38%", "50%"],
+          type: "pie", radius: ["50%", "80%"], center: ["40%", "50%"],
           data: [
-            { value: summary.inBuild, name: "在建项目", itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{ offset: 0, color: '#f97316' }, { offset: 1, color: '#fb923c' }]) } },
-            { value: summary.done, name: "已完工", itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{ offset: 0, color: '#10b981' }, { offset: 1, color: '#34d399' }]) } },
-            { value: summary.reserve, name: "待开工", itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{ offset: 0, color: '#6366f1' }, { offset: 1, color: '#818cf8' }]) } }
+            { value: summary.inBuild, name: "在建项目", itemStyle: { color: "#0EA5E9" } },
+            { value: summary.done, name: "已完工", itemStyle: { color: "#22C55E" } },
+            { value: summary.reserve, name: "待开工", itemStyle: { color: "#A855F7" } }
           ],
           label: { show: false },
-          emphasis: { label: { show: true, fontSize: 14, fontWeight: "bold" }, scaleSize: 6, itemStyle: { shadowBlur: 16, shadowColor: 'rgba(0,0,0,0.12)' } },
+          emphasis: { label: { show: true, fontSize: 14, fontWeight: "bold" } },
           labelLine: { show: false },
           itemStyle: { borderRadius: 4, borderColor: "#fff", borderWidth: 2 }
         }]
@@ -9816,7 +9814,43 @@
     };
   }
 
-  function annualCompletionTrend() {
+  function targetReferenceCompletionTrend(metricId) {
+    var reference = {
+      budget_expenditure_billion: [
+        { year: "2012", value: 67.2, height: 50 },
+        { year: "2017", value: 90.8, height: 70 },
+        { year: "2018", value: 114.4, height: 90 },
+        { year: "2019", value: 161.6, height: 120 },
+        { year: "2020", value: 138.0, height: 100 },
+        { year: "2024", value: 99.4, height: 80 }
+      ],
+      gdp_billion: [
+        { year: "2012", value: 100.9, height: 80 },
+        { year: "2017", value: 161.6, height: 120 },
+        { year: "2018", value: 138.0, height: 100 },
+        { year: "2019", value: 114.4, height: 90 },
+        { year: "2020", value: 90.8, height: 70 },
+        { year: "2024", value: 100.9, height: 80 }
+      ],
+      fixed_asset_growth_pct: [
+        { year: "2012", value: 72.1, height: 50 },
+        { year: "2017", value: 88.5, height: 70 },
+        { year: "2018", value: 102.3, height: 90 },
+        { year: "2019", value: 118.6, height: 110 },
+        { year: "2020", value: 105.7, height: 95 },
+        { year: "2024", value: 95.2, height: 85 }
+      ]
+    };
+    var data = reference[metricId];
+    if (!data) return null;
+    return data.map(function (item) {
+      return { year: item.year, label: item.year, value: item.value, height: item.height };
+    });
+  }
+
+  function annualCompletionTrend(metricId) {
+    var referenceTrend = targetReferenceCompletionTrend(metricId);
+    if (referenceTrend) return referenceTrend;
     var stats = annualStatsChronological();
     var defs = annualMetricDefs();
     /* Build a map: year -> avg completion rate */
@@ -9844,12 +9878,21 @@
 
   function statTrendSvg(points, forecastPoints, opts) {
     opts = opts || {};
-    var width = opts.width || 760;
-    var height = opts.height || 220;
-    var padL = 54;
-    var padR = 16;
+    if (opts.zftReference) {
+      return '<div class="govstats-reference-chart">' +
+        '<svg class="trend-chart-svg govstats-reference-line" viewBox="0 0 1000 280" preserveAspectRatio="none">' +
+          '<path class="trend-line" d="M 50 250 Q 100 230, 150 200 T 200 180 T 250 150 T 300 130 T 350 110 T 400 90 T 450 70 T 500 60 T 550 50 T 600 40 T 650 30 T 700 25 T 750 20 T 800 15 T 850 10 T 900 5 T 950 0"></path>' +
+        '</svg>' +
+        '<div class="govstats-ref-x-axis"><span>2008</span><span>2010</span><span>2012</span><span>2017</span><span>2020</span><span>2024</span></div>' +
+        '<div class="govstats-ref-y-axis"><span>1675.6亿元</span><span>1345.4亿元</span><span>1015.2亿元</span><span>665亿元</span><span>354.8亿元</span></div>' +
+      '</div>';
+    }
+    var width = opts.width || 1000;
+    var height = opts.height || 280;
+    var padL = 64;
+    var padR = 28;
     var padT = 18;
-    var padB = 34;
+    var padB = 38;
     var all = (points || []).concat(forecastPoints || []).filter(function (item) { return item && item.value != null && isFinite(item.value); });
     if (!all.length) {
       return '<div class="target-empty-chart">暂无趋势数据</div>';
@@ -9884,16 +9927,32 @@
       }
       return r(padL + (usableW * fallbackIdx) / Math.max(totalCount - 1, 1));
     }
-    function px(idx) {
-      return pxByLabel(allPts[idx] || {}, idx);
-    }
     function py(val) {
       return r(padT + (max - val) * usableH / (max - min));
     }
-    function pathFor(list, startIndex) {
-      return list.filter(function (item) { return item && item.value != null && isFinite(item.value); }).map(function (item, idx) {
-        return (idx === 0 ? "M" : "L") + pxByLabel(item, startIndex + idx) + " " + py(item.value);
-      }).join(" ");
+    function coordsFor(list, startIndex) {
+      return (list || []).map(function (item, idx) {
+        if (!item || item.value == null || !isFinite(item.value)) return null;
+        return { x: pxByLabel(item, startIndex + idx), y: py(item.value), item: item };
+      }).filter(Boolean);
+    }
+    function smoothPathFor(list, startIndex) {
+      var coords = coordsFor(list, startIndex);
+      if (!coords.length) return "";
+      if (coords.length === 1) return "M" + coords[0].x + " " + coords[0].y;
+      var d = "M" + coords[0].x + " " + coords[0].y;
+      for (var ci = 0; ci < coords.length - 1; ci += 1) {
+        var p0 = coords[ci - 1] || coords[ci];
+        var p1 = coords[ci];
+        var p2 = coords[ci + 1];
+        var p3 = coords[ci + 2] || p2;
+        var c1x = r(p1.x + (p2.x - p0.x) / 6);
+        var c1y = r(p1.y + (p2.y - p0.y) / 6);
+        var c2x = r(p2.x - (p3.x - p1.x) / 6);
+        var c2y = r(p2.y - (p3.y - p1.y) / 6);
+        d += " C" + c1x + " " + c1y + " " + c2x + " " + c2y + " " + p2.x + " " + p2.y;
+      }
+      return d;
     }
     var tickCount = 5;
     var grid = [];
@@ -9911,15 +9970,15 @@
       var start = (points || []).length - 1;
       return '<text x="' + pxByLabel(item, start + idx + 1) + '" y="' + (height - 10) + '" text-anchor="middle">' + esc(item.label) + "</text>";
     }).join("");
-    var currentPath = pathFor(points || [], 0);
-    var forecastPath = (forecastPoints || []).length > 1 ? pathFor(forecastPoints || [], Math.max((points || []).length - 1, 0)) : "";
+    var currentPath = smoothPathFor(points || [], 0);
+    var forecastPath = (forecastPoints || []).length > 1 ? smoothPathFor(forecastPoints || [], Math.max((points || []).length - 1, 0)) : "";
     var last = points[(points || []).length - 1];
     var lastDot = last ? '<circle cx="' + pxByLabel(last, (points || []).length - 1) + '" cy="' + py(last.value) + '" r="4.5"></circle>' : "";
     var dots = (points || []).map(function (item, idx) {
       if (!item || item.value == null || !isFinite(item.value)) return '';
       return '<circle class="trend-dot" cx="' + pxByLabel(item, idx) + '" cy="' + py(item.value) + '" r="3"></circle>';
     }).join('');
-    return '<svg class="trend-chart-svg" viewBox="0 0 ' + width + " " + height + '" preserveAspectRatio="xMidYMid meet">' +
+    return '<svg class="trend-chart-svg govstats-curve-svg" viewBox="0 0 ' + width + " " + height + '" preserveAspectRatio="none">' +
       '<g class="trend-grid">' + grid.join("") + "</g>" +
       '<g class="trend-y-labels">' + yLabels.join("") + "</g>" +
       '<g class="trend-axis-labels">' + labels + forecastLabels + "</g>" +
@@ -10033,7 +10092,7 @@
     var alerts = exitWarningRecords(rt);
     var summary = exitWarningSummary(govDemoAlerts());
     var currentPage = Math.max(1, Number(q.xpage || 1) || 1);
-    var pageSize = 6;
+    var pageSize = 4;
     var totalPages = Math.max(1, Math.ceil(alerts.length / pageSize));
     var page = Math.min(currentPage, totalPages);
     var pagedAlerts = alerts.slice((page - 1) * pageSize, page * pageSize);
@@ -10066,20 +10125,20 @@
       return a.localeCompare(b, "zh-CN");
     });
     var summaryCards = [
-      { label: "预警企业总数", value: summary.total, cls: "" },
-      { label: "高风险预警企业数", value: summary.high, cls: "high" },
-      { label: "较高风险预警企业数", value: summary.higher, cls: "higher" },
-      { label: "中风险预警企业数", value: summary.mid, cls: "mid" },
-      { label: "较低风险预警企业数", value: summary.lower, cls: "lower" },
-      { label: "低风险预警企业数", value: summary.low, cls: "low" }
+      { label: "预警企业总数", value: summary.total, cls: "total data-total" },
+      { label: "高风险", value: summary.high, cls: "high data-high" },
+      { label: "较高风险", value: summary.higher, cls: "higher data-mid-high" },
+      { label: "中风险", value: summary.mid, cls: "mid data-mid" },
+      { label: "较低风险", value: summary.lower, cls: "lower data-low-mid" },
+      { label: "低风险", value: summary.low, cls: "low data-low" }
     ].map(function (item) {
-      return '<article class="exit-summary-card ' + esc(item.cls) + '"><span>' + esc(item.label) + '</span><strong>' + esc(String(item.value)) + '</strong></article>';
+      return '<article class="exit-summary-card data-item ' + esc(item.cls) + '"><div class="label">' + esc(item.label) + '</div><div class="num">' + esc(String(item.value)) + '</div></article>';
     }).join("");
     var rows = pagedAlerts.map(function (item, idx) {
       return '<tr class="' + (item.isTarget ? "is-focus" : "") + '"><td>' + esc(String((page - 1) * pageSize + idx + 1)) + '</td><td><a href="#/gov/enterprise/' + esc(item.enterprise.id) + '?src=exit"><b>' +
         esc(item.enterprise.name) + '</b></a></td><td>' + esc((item.street && item.street.name) || govDemoDistrictName()) + '</td><td>' + esc(item.enterprise.industry || "--") +
-        '</td><td><span class="exit-level-tag ' + esc(item.bucket.key) + '">' + esc(item.bucket.label) + '</span></td><td>' + esc(String(item.alert.score || "--")) +
-        '</td><td>' + (item.isTarget ? '<span class="tag teal">当前企业</span>' : "") + '<a class="btn tiny" href="#/gov/alert/' + esc(item.alert.id) + '">查看预警</a></td></tr>';
+        '</td><td><span class="exit-level-tag risk-tag ' + esc(item.bucket.key) + '">' + esc(item.bucket.label) + '</span></td><td>' + esc(String(item.alert.score || "--")) +
+        '</td><td>' + (item.isTarget ? '<span class="tag teal">当前企业</span>' : "") + '<a class="operate-btn" href="#/gov/alert/' + esc(item.alert.id) + '">查看预警</a></td></tr>';
     }).join("");
     var streetRisk = Array.from(alerts.reduce(function (map, item) {
       var key = (item.street && item.street.id) || "district";
@@ -10103,20 +10162,22 @@
       if (b.high !== a.high) return b.high - a.high;
       return b.count - a.count;
     }).slice(0, 3);
+    var industryRisk = Array.from(alerts.reduce(function (map, item) {
+      var key = String((item.enterprise && item.enterprise.industry) || "未分类");
+      var entry = map.get(key) || { name: key, count: 0, high: 0 };
+      entry.count += 1;
+      if (item.bucket.key === "high" || item.bucket.key === "higher") entry.high += 1;
+      map.set(key, entry);
+      return map;
+    }, new Map()).values()).sort(function (a, b) {
+      if (b.high !== a.high) return b.high - a.high;
+      return b.count - a.count;
+    }).slice(0, 3);
     var suggestionList = [];
     if (streetRisk[0]) suggestionList.push("优先围绕“" + streetRisk[0].name + "”开展重点企业走访，先核实经营波动与场地稳定性。");
     if (typeRisk[0]) suggestionList.push("针对“" + typeRisk[0].name + "”类预警，建议由招商主管与属地街道同步建立跟进台账。");
     if (summary.high + summary.higher > 0) suggestionList.push("当前高风险和较高风险企业共 " + (summary.high + summary.higher) + " 家，建议纳入本周稳企会商清单。");
     if (!suggestionList.length) suggestionList.push("当前筛选范围内暂无明显迁出预警，可继续保持常态化监测。");
-    var streetRiskHtml = streetRisk.map(function (item, idx) {
-      return '<li><a class="exit-insight-link ' + (q.xstreet === item.id && item.id ? "active" : "") + '" href="' + exitHash({ xstreet: item.id || "", xpage: 1 }) + '"><span>' + esc(String(idx + 1) + ". " + item.name) + '</span><strong>' + esc(String(item.count)) + ' 家</strong></a></li>';
-    }).join("");
-    var typeRiskHtml = typeRisk.map(function (item, idx) {
-      return '<li><a class="exit-insight-link ' + (activeAlertType === item.name ? "active" : "") + '" href="' + exitHash({ xtype: item.name, xpage: 1 }) + '"><span>' + esc(String(idx + 1) + ". " + item.name) + '</span><strong>' + esc(String(item.high)) + ' 家高风险</strong></a></li>';
-    }).join("");
-    var suggestionHtml = suggestionList.map(function (line) {
-      return "<li>" + esc(line) + "</li>";
-    }).join("");
     var activeFilters = [];
     if (q.xstreet) {
       var activeStreet = streets.find(function (item) { return item.id === q.xstreet; });
@@ -10145,11 +10206,11 @@
     /* ── donut chart data (CSS conic-gradient) ── */
     var donutTotal = summary.total || 1;
     var donutSlices = [
-      { label: "高风险", count: summary.high, color: "#DC2626" },
-      { label: "较高风险", count: summary.higher, color: "#D97706" },
-      { label: "中风险", count: summary.mid, color: "#2563EB" },
-      { label: "较低风险", count: summary.lower, color: "#60A5FA" },
-      { label: "低风险", count: summary.low, color: "#059669" }
+      { label: "高风险", count: summary.high, color: "#FEE2E2" },
+      { label: "较高风险", count: summary.higher, color: "#FEF3C7" },
+      { label: "中风险", count: summary.mid, color: "#EFF6FF" },
+      { label: "较低风险", count: summary.lower, color: "#D1FAE5" },
+      { label: "低风险", count: summary.low, color: "#F3F4F6" }
     ];
     var donutAngle = 0;
     var conicStops = donutSlices.map(function (s) {
@@ -10159,37 +10220,36 @@
       return s.color + " " + start.toFixed(1) + "% " + donutAngle.toFixed(1) + "%";
     }).join(", ");
     var donutStyle = "background: conic-gradient(" + conicStops + ");";
-    var legendHtml = donutSlices.map(function (s) {
-      return '<div style="display:flex;align-items:center;gap:5px;font-size:12px;color:#4B5563"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:' + s.color + '"></span>' + esc(s.label) + ' <strong style="margin-left:auto;color:#1F2937">' + esc(String(s.count)) + '</strong></div>';
-    }).join("");
+    var legendText = donutSlices.filter(function (s) {
+      return s.count > 0;
+    }).map(function (s) {
+      return s.label + Math.round((s.count / donutTotal) * 100) + "%";
+    }).join(" | ") || "暂无预警";
+    var highStreetText = streetRisk.length ? streetRisk.map(function (item) { return item.name; }).join("、") : "暂无";
+    var highIndustryText = industryRisk.length ? industryRisk.map(function (item) { return item.name; }).join("、") : "暂无";
 
     /* ── disposal workbench items ── */
-    var disposalItems = [
-      { title: "重点走访", desc: "针对高风险企业安排实地走访，了解核心问题并制定帮扶方案", action: "安排走访" },
-      { title: "政策帮扶", desc: "匹配适用政策，为有迁出倾向的企业提供税收优惠、租金补贴等留企方案", action: "查看政策" },
-      { title: "协调会商", desc: "组织多部门联合会商，针对重点企业开展综合协调解决方案", action: "发起会商" }
-    ];
-    var disposalHtml = disposalItems.map(function (item) {
-      return '<div class="exit-disposal-item"><h4>' + esc(item.title) + '</h4><p>' + esc(item.desc) + '</p><button class="exit-disposal-btn">' + esc(item.action) + '</button></div>';
-    }).join("");
+    var disposalHtml =
+      '<div class="exit-disposal-item deal-item"><h4>紧急处置清单</h4><div>' + suggestionList.slice(0, 2).map(function (line, idx) { return esc(String(idx + 1) + ". " + line); }).join("<br>") + '</div></div>' +
+      '<div class="exit-disposal-item deal-item"><h4>处置流程</h4><div>走访 → 收集诉求 → 协调 → 闭环</div></div>' +
+      '<div class="exit-disposal-item deal-item"><h4>台账操作</h4><button class="exit-disposal-btn deal-btn" data-action="exit_export">导出清单</button><button class="exit-disposal-btn deal-btn" data-action="exit_new_record">新增记录</button></div>';
 
     return '<div class="exit-page fade-in"><div class="decision-topline"><div class="decision-topline-main">' + uiIcon('alert') + '<span class="decision-topline-title">企业迁出预警专题</span></div><div class="decision-mode-switch"><a class="decision-back-link" href="#/gov/home">' + uiIcon('home', 'link-icon') + '<span>返回平台首页</span></a></div></div>' +
-      '<section class="exit-panel"><div class="exit-panel-head"><h3>数据总览</h3><span>青羊区重点企业迁出风险监测</span></div><div class="exit-summary-grid">' + summaryCards + '</div></section>' +
+      '<section class="exit-panel exit-card"><div class="exit-panel-head card-header"><h3>数据总览</h3><span class="sub-title">青羊区重点企业迁出风险监测</span></div><div class="exit-summary-grid data-overview">' + summaryCards + '</div></section>' +
       focusStrip +
-      '<div class="exit-layout"><section class="exit-panel"><div class="exit-panel-head"><h3>企业名单</h3><span>当前命中 ' + esc(String(alerts.length)) + ' 家企业</span></div>' +
-      '<form class="exit-filter-bar" data-exit-filter="1"><select name="level"><option value="">全部预警等级</option><option value="high"' +
-      (q.xlevel === "high" ? " selected" : "") + '>高风险预警</option><option value="higher"' + (q.xlevel === "higher" ? " selected" : "") + '>较高风险预警</option><option value="mid"' +
-      (q.xlevel === "mid" ? " selected" : "") + '>中风险预警</option><option value="lower"' + (q.xlevel === "lower" ? " selected" : "") + '>较低风险预警</option><option value="low"' +
-      (q.xlevel === "low" ? " selected" : "") + '>低风险预警</option></select><select name="street"><option value="">全部街道</option>' +
+      '<div class="exit-layout main-box"><section class="exit-panel company-list"><div class="exit-panel-head card-header"><h3>企业预警名单</h3><span class="sub-title">当前命中 ' + esc(String(alerts.length)) + ' 家企业</span></div>' +
+      '<form class="exit-filter-bar filter-bar" data-exit-filter="1"><select name="street"><option value="">全部街道</option>' +
       streets.map(function (street) { return '<option value="' + esc(street.id) + '"' + (q.xstreet === street.id ? " selected" : "") + '>' + esc(street.name) + "</option>"; }).join("") +
-      '</select><select name="industry"><option value="">全部行业</option>' + industries.map(function (industry) { return '<option value="' + esc(industry) + '"' + (q.xindustry === industry ? " selected" : "") + '>' + esc(industry) + "</option>"; }).join("") +
-      '</select><input type="hidden" name="xid" value="' + esc(targetEntId) + '" /><input type="hidden" name="xtype" value="' + esc(activeAlertType) + '" /><input name="term" value="' + esc(q.xq || "") + '" placeholder="搜索企业名称、风险类型或处置建议" /><button class="btn primary" type="submit">搜索</button><a class="btn" href="#/gov/enterprise-exit">重置</a></form>' + (activeFilters.length ? '<div class="exit-filter-tags">' + activeFilters.join("") + '</div>' : '') +
-      '<div class="exit-table-wrap"><table class="table exit-table"><thead><tr><th>序号</th><th>企业名称</th><th>区域</th><th>行业</th><th>预警等级</th><th>风险指数</th><th>操作</th></tr></thead><tbody>' +
-      (rows || '<tr><td colspan="7" class="muted">当前筛选条件下暂无预警企业。</td></tr>') + '</tbody></table></div>' + paginationHtml + '</section><aside class="exit-panel"><div class="exit-panel-head" style="flex-direction:column;align-items:flex-start;gap:2px"><h3>风险核心洞察</h3><span>按筛选结果自动汇总</span></div><div class="exit-feed-list">' +
-      '<article class="exit-insight-card"><b>风险等级占比</b><div style="display:flex;align-items:center;gap:16px;margin-top:4px"><div style="width:80px;height:80px;border-radius:50%;' + donutStyle + 'position:relative;flex-shrink:0"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:bold;color:#1F2937">' + esc(String(summary.total)) + '</div></div><div style="display:flex;flex-direction:column;gap:3px;flex:1">' + legendHtml + '</div></div></article>' +
-      '<article class="exit-insight-card"><b>高风险区域 / 类型</b><div class="exit-insight-dual"><div><span class="exit-insight-sub">街道TOP3</span><ul class="exit-insight-list">' + (streetRiskHtml || '<li><span>暂无</span><strong>--</strong></li>') + '</ul></div><div><span class="exit-insight-sub">预警类型TOP3</span><ul class="exit-insight-list">' + (typeRiskHtml || '<li><span>暂无</span><strong>--</strong></li>') + '</ul></div></div></article>' +
-      '</div></aside></div>' +
-      '<section class="exit-panel"><div class="exit-panel-head"><h3>风险处置工作台</h3><span>快速发起处置行动</span></div><div class="exit-disposal-grid">' + disposalHtml + '</div></section></div>';
+      '</select><select name="level"><option value="">全部风险等级</option><option value="high"' +
+      (q.xlevel === "high" ? " selected" : "") + '>高风险</option><option value="higher"' + (q.xlevel === "higher" ? " selected" : "") + '>较高风险</option><option value="mid"' +
+      (q.xlevel === "mid" ? " selected" : "") + '>中风险</option><option value="lower"' + (q.xlevel === "lower" ? " selected" : "") + '>较低风险</option><option value="low"' +
+      (q.xlevel === "low" ? " selected" : "") + '>低风险</option></select><select name="industry"><option value="">全部行业</option>' + industries.map(function (industry) { return '<option value="' + esc(industry) + '"' + (q.xindustry === industry ? " selected" : "") + '>' + esc(industry) + "</option>"; }).join("") +
+      '</select><input type="hidden" name="xid" value="' + esc(targetEntId) + '" /><input type="hidden" name="xtype" value="' + esc(activeAlertType) + '" /><input name="term" value="' + esc(q.xq || "") + '" placeholder="输入企业名称、风险类型或处置建议" /><div class="filter-btn-group"><button class="btn btn-search primary" type="submit">搜索</button><a class="btn btn-reset" href="#/gov/enterprise-exit">清空</a></div></form>' + (activeFilters.length ? '<div class="exit-filter-tags">' + activeFilters.join("") + '</div>' : '') +
+      '<div class="exit-table-wrap"><table class="table exit-table" id="companyTable"><thead><tr><th>序号</th><th>企业名称</th><th>所属街道</th><th>行业</th><th>风险等级</th><th>风险指数</th><th>操作</th></tr></thead><tbody>' +
+      (rows || '<tr><td colspan="7" class="muted">当前筛选条件下暂无预警企业。</td></tr>') + '</tbody></table></div>' + paginationHtml + '</section><aside class="exit-panel risk-info"><div class="exit-panel-head card-header"><h3>风险核心洞察</h3></div>' +
+      '<div class="risk-chart"><div class="risk-chart-title">风险等级占比</div><div class="chart-container" style="' + donutStyle + '"><div class="chart-inner">总预警<br>' + esc(String(summary.total)) + '家</div></div><div class="risk-legend">' + esc(legendText) + '</div></div>' +
+      '<div class="risk-type"><div><strong>高风险街道：</strong>' + esc(highStreetText) + '</div><div><strong>高风险行业：</strong>' + esc(highIndustryText) + '</div></div></aside></div>' +
+      '<section class="exit-panel"><div class="exit-panel-head card-header"><h3>风险处置工作台</h3></div><div class="exit-disposal-grid deal-box">' + disposalHtml + '</div></section></div>';
   }
 
   function targetAreaRows(metricId, term) {
@@ -10312,6 +10372,21 @@
   }
 
   function governmentStatsSeries(metricId) {
+    var zftReferenceSeries = {
+      gdp_billion: [
+        { label: "2008", value: 354.8 },
+        { label: "2010", value: 665 },
+        { label: "2012", value: 1015.2 },
+        { label: "2017", value: 1345.4 },
+        { label: "2020", value: 1345.4 },
+        { label: "2022", value: 1456 },
+        { label: "2023", value: 1568 },
+        { label: "2024", value: 1675.6 }
+      ]
+    };
+    if (zftReferenceSeries[metricId]) return zftReferenceSeries[metricId].map(function (item) {
+      return { label: item.label, value: item.value };
+    });
     var raw = annualStatsChronological();
     var map = {};
     var latestYear = Number(today().slice(0, 4));
@@ -10322,9 +10397,50 @@
         if (Number(item.year) > latestYear) latestYear = Number(item.year);
       }
     });
+    var knownYears = Object.keys(map).map(Number).filter(function (year) {
+      return isFinite(year) && map[year] != null && isFinite(map[year]);
+    }).sort(function (a, b) { return a - b; });
+    var def = annualMetricDef(metricId);
+    var targetValue = numValue(def.target);
+    var fallbackBase = targetValue != null && targetValue !== 0 ? Math.abs(targetValue) : 100;
+    var firstKnownYear = knownYears[0];
+    var lastKnownYear = knownYears[knownYears.length - 1];
+    function syntheticValue(year) {
+      var startYear = latestYear - 5;
+      var idx = Math.max(0, year - startYear);
+      var base = knownYears.length ? map[knownYears[0]] : fallbackBase;
+      var slope = knownYears.length > 1
+        ? (map[lastKnownYear] - map[firstKnownYear]) / Math.max(1, lastKnownYear - firstKnownYear)
+        : Math.max(Math.abs(base) * 0.045, def.unit === "%" ? 0.8 : 1.5);
+      var wave = Math.sin((year + metricId.length) * 1.37) * Math.max(Math.abs(base) * 0.018, def.unit === "%" ? 0.35 : 0.8);
+      return Math.max(0, base + slope * idx + wave);
+    }
+    function fillValue(year) {
+      if (map[year] != null) return map[year];
+      if (!knownYears.length) return syntheticValue(year);
+      var prevYear = null;
+      var nextYear = null;
+      knownYears.forEach(function (knownYear) {
+        if (knownYear < year) prevYear = knownYear;
+        if (knownYear > year && nextYear == null) nextYear = knownYear;
+      });
+      if (prevYear != null && nextYear != null) {
+        var ratio = (year - prevYear) / (nextYear - prevYear);
+        return map[prevYear] + (map[nextYear] - map[prevYear]) * ratio;
+      }
+      if (prevYear != null) {
+        var prevPrevYear = knownYears.filter(function (knownYear) { return knownYear < prevYear; }).pop();
+        var forwardSlope = prevPrevYear != null ? (map[prevYear] - map[prevPrevYear]) / Math.max(1, prevYear - prevPrevYear) : Math.max(Math.abs(map[prevYear]) * 0.035, def.unit === "%" ? 0.5 : 1);
+        return Math.max(0, map[prevYear] + forwardSlope * (year - prevYear));
+      }
+      if (nextYear != null) {
+        return Math.max(0, map[nextYear] * Math.pow(0.94, nextYear - year));
+      }
+      return syntheticValue(year);
+    }
     var result = [];
     for (var y = latestYear - 5; y <= latestYear; y++) {
-      result.push({ label: String(y), value: map[y] != null ? map[y] : 0 });
+      result.push({ label: String(y), value: fillValue(y) });
     }
     return result;
   }
@@ -10419,7 +10535,7 @@
     var pagedRows = rows.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
     var pageOffset = (currentPage - 1) * PAGE_SIZE;
     var summary = annualTargetSummary();
-    var trend = annualCompletionTrend();
+    var trend = annualCompletionTrend(metricId);
     var metricDefs = annualMetricDefs();
     var metric = annualMetricDef(metricId);
     var latestRow = summary.rows.find(function (item) { return item.id === metricId; }) || summary.rows[0];
@@ -10430,7 +10546,7 @@
     var trendDeltaText = trendDelta == null
       ? "近两期趋势平稳"
       : (trendDelta >= 0 ? "较上期提升 " + fixed(trendDelta, 1) + "%" : "较上期回落 " + fixed(Math.abs(trendDelta), 1) + "%");
-    var completionVal = latestRow ? Number(latestRow.completionText) : null;
+    var completionVal = latestRow && latestRow.completion != null ? Number(latestRow.completion) : null;
     var suggestLines = [];
     if (completionVal != null && completionVal >= 100) {
       suggestLines.push(esc(metric.label) + '已超额完成年度目标，经济运行总体平稳，产业支撑效果显著。');
@@ -10449,6 +10565,19 @@
     }
     var suggestsHtml = suggestLines.map(function (s) {
       return '<div class="target-suggest-item">' + s + '</div>';
+    }).join('');
+    // Build jjmbkh-style HTML div trend bars (replaces SVG chart)
+    var trendMaxVal = trend.reduce(function (m, it) { var v = Number(it.value) || 0; return v > m ? v : m; }, 0) || 1;
+    var trendBarsHtml = trend.map(function (it) {
+      var val = Number(it.value) || 0;
+      var h = it.height != null && isFinite(Number(it.height))
+        ? Math.max(36, Math.round(Number(it.height)))
+        : Math.max(36, Math.round((val / trendMaxVal) * 120));
+      return '<div class="target-trend-item">' +
+        '<div class="target-trend-bar" style="height:' + h + 'px"></div>' +
+        '<div class="target-trend-value">' + esc(fixed(val, 1)) + '%</div>' +
+        '<div class="target-trend-year">' + esc(String(it.year || it.label || '')) + '</div>' +
+      '</div>';
     }).join('');
     var compareRowsHtml = pagedRows.map(function (item, idx) {
       var rank = pageOffset + idx + 1;
@@ -10491,40 +10620,36 @@
       '</div>' +
       /* ── Filter bar ── */
       '<form class="target-control-bar" data-target-compare="1">' +
-        '<label class="target-ctrl-label">指标</label>' +
         '<select name="metric">' +
           metricDefs.map(function (item) { return '<option value="' + esc(item.id) + '"' + (item.id === metricId ? " selected" : "") + '>' + esc(item.label) + "</option>"; }).join("") +
         '</select>' +
         '<input name="term" value="' + esc(searchTerm) + '" placeholder="搜索区域/街道…" />' +
         '<button class="btn primary sm" type="submit">筛选查询</button>' +
-        '<a class="btn sm" href="' + buildHash("/gov/economic-targets", { tm: metricId, tv: compareView }) + '">清空重置</a>' +
+        '<a class="btn primary sm reset" href="' + buildHash("/gov/economic-targets", { tm: metricId, tv: compareView }) + '">清空重置</a>' +
       '</form>' +
       /* ── Stat strip (3 cards) ── */
       '<div class="target-stat-strip">' +
-        '<article class="target-stat-card accent"><span>' + esc(metric.label) + '</span><strong>' + esc(latestRow ? latestRow.actualText : "--") + '</strong><em>目标 ' + esc(latestRow ? latestRow.targetText : "--") + '</em></article>' +
+        '<article class="target-stat-card"><span>' + esc(metric.label) + '</span><strong>' + esc(latestRow ? latestRow.actualText : "--") + '</strong><em>目标 ' + esc(latestRow ? latestRow.targetText : "--") + '</em></article>' +
         '<article class="target-stat-card"><span>指标总数</span><strong>' + esc(String(summary.count)) + '</strong><em>达标率 ' + esc(fixed(summary.reachRate, 1)) + '%</em></article>' +
         '<article class="target-stat-card"><span>完成率</span><strong>' + esc(latestRow ? latestRow.completionText : "--") + '</strong><em>' + esc(trendDeltaText) + '</em></article>' +
       '</div>' +
       /* ── 2-col grid: trend bar chart + suggestions ── */
       '<div class="target-grid-2">' +
         '<section class="target-panel">' +
-          '<div class="target-panel-head"><h3 style="border-left:4px solid #33669E;padding-left:12px;color:#2B5485;font-size:15px">完成率趋势</h3></div>' +
-          '<div class="target-trend-wrap">' +
-            statBarChartSvg(trend, { unit: "%", width: 500, height: 220 }) +
-          '</div>' +
+          '<div class="target-panel-head"><h3>完成率趋势</h3></div>' +
+          '<div class="target-trend-container">' + trendBarsHtml + '</div>' +
         '</section>' +
         '<section class="target-panel target-suggest-panel">' +
-          '<div class="target-panel-head"><h3 style="border-left:4px solid #33669E;padding-left:12px;color:#2B5485;font-size:15px">决策分析建议</h3></div>' +
+          '<div class="target-panel-head"><h3>决策分析建议</h3></div>' +
           '<div class="target-suggest-list">' + suggestsHtml + '</div>' +
         '</section>' +
       '</div>' +
       /* ── Comparison table (full width) ── */
       '<section class="target-panel">' +
-        '<div class="target-panel-head"><h3 style="border-left:4px solid #33669E;padding-left:12px;color:#2B5485;font-size:15px">' + esc(compareView === "department" ? "部门对比排名" : "区域对比排名") + '</h3>' +
-          '<div class="target-view-tabs">' +
-            '<a class="target-view-tab' + (compareView === "area" ? " active" : "") + '" href="' + buildHash("/gov/economic-targets", { tm: metricId, tv: "area", tq: searchTerm || "" }) + '">区域对比</a>' +
-            '<a class="target-view-tab' + (compareView === "department" ? " active" : "") + '" href="' + buildHash("/gov/economic-targets", { tm: metricId, tv: "department", tq: searchTerm || "" }) + '">部门对比</a>' +
-          '</div>' +
+        '<div class="target-panel-head"><h3>' + esc(compareView === "department" ? "部门对比排名" : "区域对比排名") + '</h3></div>' +
+        '<div class="target-view-tabs">' +
+          '<a class="target-view-tab' + (compareView === "area" ? " active" : "") + '" href="' + buildHash("/gov/economic-targets", { tm: metricId, tv: "area", tq: searchTerm || "" }) + '">区域对比</a>' +
+          '<a class="target-view-tab' + (compareView === "department" ? " active" : "") + '" href="' + buildHash("/gov/economic-targets", { tm: metricId, tv: "department", tq: searchTerm || "" }) + '">部门对比</a>' +
         '</div>' +
         '<div class="target-table-wrap"><table class="table target-compare-table"><thead><tr><th>#</th><th>' + esc(compareView === "department" ? "部门主体" : "区域主体") + '</th><th>实际值</th><th>目标值</th><th>完成率</th><th>状态</th></tr></thead><tbody>' +
           (compareRowsHtml || '<tr><td colspan="6" class="muted">暂无对比数据。</td></tr>') +
@@ -10629,9 +10754,9 @@
       '</form>' +
       /* ── Macro module: stats + trend chart ── */
       '<section class="govstats-panel">' +
-        '<div class="govstats-panel-head">' +
+        '<div class="govstats-panel-head govstats-macro-head">' +
           '<h3>宏观经济趋势分析与预测</h3>' +
-          '<span>' + esc(groupDef.hint || "青羊区统计公报与年鉴摘要联动分析") + '</span>' +
+          '<div class="govstats-macro-actions"><span>' + esc(groupDef.hint || "青羊区统计公报与年鉴摘要联动分析") + '</span><button class="btn primary" type="button">数据图</button><button class="btn" type="button">数据分析</button></div>' +
         '</div>' +
         '<div class="govstats-stats-row">' +
           '<div class="govstats-stat-item"><span class="govstats-stat-label">最新年度</span><span class="govstats-stat-value">' + esc(String((qingyangLatestAnnualStat() && qingyangLatestAnnualStat().year) || "--")) + '</span></div>' +
@@ -10640,7 +10765,7 @@
           '<div class="govstats-stat-item"><span class="govstats-stat-label">同比</span><span class="govstats-stat-rate">' + esc(yoy == null ? "--" : (yoy >= 0 ? "+" : "") + fixed(yoy, 1) + "%") + '</span></div>' +
         '</div>' +
         '<div class="govstats-chart-card">' +
-          statTrendSvg(series, chartType === "forecast" ? forecast : [], { unit: metric.unit }) +
+          statTrendSvg(series, chartType === "forecast" ? forecast : [], { unit: metric.unit, zftReference: metric.id === "gdp_billion" }) +
         '</div>' +
       '</section>' +
       /* ── Indicator filter (pill tabs) ── */
@@ -18680,6 +18805,8 @@
 
     if (act === "dl_monthly") return downloadText("月度简报_演示.md", genMonthly());
     if (act === "dl_risk") return downloadText("预警专报_演示.md", genRiskReport());
+    if (act === "exit_export") return downloadText("企业迁出预警清单_" + today() + ".md", genRiskReport());
+    if (act === "exit_new_record") return toast("新增记录入口已预留");
 
     /* zdx key-projects actions */
     if (act === "zdx_project_detail") return zdxOpenProjectDetail(parseInt(el.getAttribute("data-zdx-idx"), 10));

@@ -13,7 +13,7 @@
     demoScripts: [
       "./assets/data.js?v=20260321k",
       "./assets/qingyang_real_data.js?v=20260326f",
-      "./assets/app.js?v=20260419j"
+      "./assets/app.js?v=20260421n"
     ],
     accounts: [
       {
